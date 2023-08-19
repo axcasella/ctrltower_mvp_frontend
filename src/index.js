@@ -7,7 +7,9 @@ import globalReducer from "state";
 import { Provider } from "react-redux";
 
 const store = configureStore({
-  reducer: globalReducer,
+  reducer: { 
+    global: globalReducer 
+  },
 });
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
