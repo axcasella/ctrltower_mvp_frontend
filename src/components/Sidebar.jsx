@@ -48,16 +48,14 @@ const Sidebar = ({
   isNonMobile,
   drawerWidth,
 }) => {
-  const pathName = useLocation();
+  const { pathname } = useLocation();
   const [active, setActive] = useState("");
   const navigate = useNavigate();
   const theme = useTheme();
 
   useEffect(() => {
-    setActive(pathName.pathname.substring(1));
-  }, [pathName]);
-
-  console.log("drawerWidth", drawerWidth);
+    setActive(pathname.substring(1));
+  }, [pathname]);
 
   return (
     <Box component="nav">
