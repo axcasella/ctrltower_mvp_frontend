@@ -8,7 +8,7 @@ import { AppBar, IconButton, InputBase, Toolbar, useTheme } from '@mui/material'
 import { useLocation } from 'react-router-dom';
 import { capitalizePathname } from 'helpers';
 
-const Navbar = () => {
+const Navbar = ({user}) => {
   const dispatch = useDispatch();
   const theme = useTheme();
 
