@@ -18,17 +18,28 @@ const Navbar = () => {
     <Toolbar sx = {{justifyContent: "space-between"}}>
       {/* Left side */}
       <FlexBetween>
-        <IconButton onClick={() => console.log("open/close side bar")}>
-          <MenuIcon />
-        </IconButton>
-
-        <FlexBetween backgroundColor={theme.palette.background.alt} borderRadius="9px" gap="3rem" p="0.5rem 1.5rem">
+        <FlexBetween 
+          backgroundColor={theme.palette.background.alt} 
+          borderRadius="9px" 
+          gap="3rem" 
+          p="0.1rem 1.5rem"
+        >
           <InputBase placeholder="Search..." />
           <IconButton>
             <Search />
           </IconButton>
 
         </FlexBetween>
+      </FlexBetween>
+
+      {/* Right side */}
+      <FlexBetween gap="1.5rem">
+        <IconButton onClick={() => dispatch(setMode())}>
+          {theme.palette.mode === "light" ? <LightModeOutlined sx={{fontSize: "25px"}}/> : <DarkModeOutlined sx={{fontSize: "25px"}}/>}
+        </IconButton>
+        <IconButton>
+          <SettingsOutlined sx={{fontSize: "25px"}}/>
+        </IconButton>
       </FlexBetween>
     </Toolbar>
   </AppBar>
