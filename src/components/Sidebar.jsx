@@ -76,9 +76,9 @@ const Sidebar = ({
       >
         <Box width="100%">
           <Box m="1.5rem 2rem 2rem 3rem">
-            <FlexBetween color={theme.palette.secondary.main}>
+            <FlexBetween color="white">
               <Box display="flex" alignItems="center" gap="0.5rem">
-                <Typography variant="h4" fontWeight="bold">
+                <Typography variant="h3" fontWeight="bold">
                   CtrlTower
                 </Typography>
               </Box>
@@ -107,10 +107,10 @@ const Sidebar = ({
 
                   sx = {{
                     backgroundColor: active === lcText ? theme.palette.secondary[300] : "transparent",
-                    color: active === lcText ? theme.palette.primary[600] : theme.palette.secondary[100]
+                    color: active === lcText ? "white" : "grey"
                   }}
                 >
-                  <ListItemIcon sx={{ml: "2rem", color: active === lcText ? theme.palette.primary[600] : theme.palette.secondary[200]}}>
+                  <ListItemIcon sx={{ml: "2rem", color: active === lcText ? "white" : "grey"}}>
                     {icon}
                   </ListItemIcon>
                   <ListItemText primary={text} />
