@@ -11,7 +11,6 @@ import { capitalizePathname } from 'helpers';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 
 const Navbar = ({user}) => {
-  console.log(user);
   const dispatch = useDispatch();
   const theme = useTheme();
 
