@@ -10,6 +10,8 @@ import {
   Rating,
   useTheme,
   useMediaQuery,
+  Stack,
+  Chip,
 } from "@mui/material";
 import VendorPageHeader from "components/VendorPageHeader";
 import { useGetVendorsQuery } from "state/api";
@@ -41,24 +43,38 @@ const Vendor = ({
       }}
     >
       <CardContent>
-        <Typography
+        {/* <Typography
           sx={{ fontSize: 14 }}
           color={theme.palette.secondary[700]}
           gutterBottom
         >
           {type}
-        </Typography>
-        <Typography variant="h5" component="div">
+        </Typography> */}
+        <Typography variant="h4" component="div">
           {name}
         </Typography>
+        <Typography variant="body2">{description}</Typography>
+
         <Typography sx={{ mb: "1.5rem" }} color={theme.palette.secondary[400]}>
           {/* ${Number(price).toFixed(2)} */}
           $30000 - $50000
         </Typography>
-        <Rating value={complianceInfo.rating} readOnly />
+        {/* <Rating value={complianceInfo.rating} readOnly /> */}
 
-        <Typography variant="body2">{description}</Typography>
+        <Stack direction="row" spacing={1}>
+          {tags.map((tag) => (
+            <Chip label={tag} 
+              sx={{
+                height: "1.5rem",
+                borderRadius: "0",
+                color: "black",
+                backgroundColor: "lightgrey",
+            }} />
+          ))}
+        </Stack>
+
       </CardContent>
+
       <CardActions>
         <Button
           variant="primary"
@@ -68,6 +84,7 @@ const Vendor = ({
           See More
         </Button>
       </CardActions>
+
       <Collapse
         in={isExpanded}
         timeout="auto"
@@ -77,7 +94,9 @@ const Vendor = ({
         }}
       >
         <CardContent>
-          <Typography>id: {_id}</Typography>
+          <Typography>address: {address}</Typography>
+          <Typography>city: {city}</Typography>
+          <Typography>state: {state}</Typography>
           <Typography>Phone: {phone_number}</Typography>
           <Typography>
             Email: {email}
@@ -99,12 +118,12 @@ const Vendors = () => {
 
   return (
     <Box m="1.5rem 2.5rem">
-      <VendorPageHeader title="VENDORS" subtitle="All vendors." />
+      <VendorPageHeader title="Explore" subtitle="" />
       {data || !isLoading ? (
         <Box
           mt="20px"
           display="grid"
-          gridTemplateColumns="repeat(4, minmax(0, 1fr))"
+          gridTemplateColumns="repeat(3, minmax(0, 1fr))"
           justifyContent="space-between"
           rowGap="20px"
           columnGap="1.33%"
