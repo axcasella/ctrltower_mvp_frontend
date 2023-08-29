@@ -72,17 +72,17 @@ const Sidebar = ({
         sx={{
           width: drawerWidth,
           "& .MuiDrawer-paper": {
-            color: theme.palette.secondary[200],
+            color: theme.palette.grey[0],
             backgroundColor: theme.palette.background.alt,
             boxSizing: "border-box",
-            borderWidth: isNonMobile ? 0 : "2px",
+            borderWidth: isNonMobile ? "1px" : "2px",
             width: drawerWidth,
           }
         }}
       >
         <Box width="100%">
           <Box m="1.5rem 2rem 2rem 3rem">
-            <FlexBetween color="white">
+            <FlexBetween color={theme.palette.grey[1000]}>
               <Box display="flex" alignItems="center" gap="0.5rem">
                 <Typography variant="h3" fontWeight="bold">
                   CtrlTower
@@ -131,7 +131,7 @@ const Sidebar = ({
             <Divider />
             <List>
               <ListItem>
-                <ListItemIcon sx={{ml: "2rem", color: "grey"}}>
+                <ListItemIcon sx={{ml: "2rem", color: theme.palette.grey[900]}}>
                   <SupportAgentOutlinedIcon />
                 </ListItemIcon>
                 <ListItemText primary={"Need help with CtrlTower?"} />

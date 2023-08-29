@@ -31,6 +31,7 @@ const Navbar = ({user}) => {
       position: "static",
       background: "none",
       boxShadow: "none",
+      borderBottom: "1px solid lightgrey",
     }}>
     <Toolbar sx = {{justifyContent: "space-between"}}>
       {/* Left side */}
@@ -56,7 +57,7 @@ const Navbar = ({user}) => {
           {theme.palette.mode === "light" ? <LightModeOutlined sx={{fontSize: "25px"}}/> : <DarkModeOutlined sx={{fontSize: "25px"}}/>}
         </IconButton> */}
         <IconButton>
-          <NotificationsIcon sx={{fontSize: "25px", color:"grey"}}/>
+          <NotificationsIcon sx={{fontSize: "25px", color: theme.palette.grey[600]}}/>
         </IconButton>
 
         <FlexBetween>

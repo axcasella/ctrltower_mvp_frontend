@@ -82,8 +82,8 @@ const Vendor = ({
               sx={{
                 height: "1.5rem",
                 borderRadius: "0",
-                color: "black",
-                backgroundColor: "lightgrey",
+                color: theme.palette.grey[1000],
+                backgroundColor: theme.palette.grey[0],
             }} />
           ))}
         </Stack>
@@ -126,6 +126,8 @@ const Vendor = ({
 };
 
 const Vendors = () => {
+  const theme = useTheme();
+
   const shipperID = useSelector(state => state.global.shipperID);
 
   const { data, isLoading } = useGetVendorsQuery(shipperID);
@@ -135,60 +137,71 @@ const Vendors = () => {
   console.log("data", data);
 
   return (
-    <Box m="1.5rem 2.5rem">
-      <ExplorePageHeader title="Explore" subtitle="" />
-      {data || !isLoading ? (
-        <Box
-          mt="20px"
-          display="grid"
-          gridTemplateColumns="repeat(3, minmax(0, 1fr))"
-          justifyContent="space-between"
-          rowGap="20px"
-          columnGap="1.33%"
-          sx={{
-            "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
-          }}
-        >
-          {data.map(
-            ({
-              _id,
-              name,
-              type,
-              description,
-              tags,
-              address,
-              city,
-              state,
-              zip,
-              phone_number,
-              email,
-              website,
-              complianceInfo,
-              shipperStats,
-            }) => (
-              <Vendor
-                key={_id}
-                _id={_id}
-                name={name}
-                type={type}
-                tags={tags}
-                description={description}
-                address={address}
-                complianceInfo={complianceInfo}
-                shipperStats={shipperStats}
-                city={city}
-                state={state}
-                zip={zip}
-                phone_number={phone_number}
-                email={email}
-                website={website}
-              />
-            )
-          )}
-        </Box>
-      ) : (
-        <>Loading...</>
-      )}
+    <Box sx={{
+      padding: "1.5rem",
+      backgroundColor: theme.palette.grey[100],
+    }}>
+      <Box m="1rem 0.5rem"
+        sx={{
+          backgroundColor: "#ffffff",
+          padding: "1.5rem",   
+          borderRadius: "0.55rem",
+        }}
+      >
+        <ExplorePageHeader title="Explore" subtitle="" />
+        {data || !isLoading ? (
+          <Box
+            mt="20px"
+            display="grid"
+            gridTemplateColumns="repeat(3, minmax(0, 1fr))"
+            justifyContent="space-between"
+            rowGap="20px"
+            columnGap="1.33%"
+            sx={{
+              "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
+            }}
+          >
+            {data.map(
+              ({
+                _id,
+                name,
+                type,
+                description,
+                tags,
+                address,
+                city,
+                state,
+                zip,
+                phone_number,
+                email,
+                website,
+                complianceInfo,
+                shipperStats,
+              }) => (
+                <Vendor
+                  key={_id}
+                  _id={_id}
+                  name={name}
+                  type={type}
+                  tags={tags}
+                  description={description}
+                  address={address}
+                  complianceInfo={complianceInfo}
+                  shipperStats={shipperStats}
+                  city={city}
+                  state={state}
+                  zip={zip}
+                  phone_number={phone_number}
+                  email={email}
+                  website={website}
+                />
+              )
+            )}
+          </Box>
+        ) : (
+          <>Loading...</>
+        )}
+      </Box>
     </Box>
   );
 };

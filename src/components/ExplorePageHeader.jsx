@@ -17,18 +17,24 @@ const ExplorePageHeader = ({ title, subtitle }) => {
   };
 
   return (
-    <Box>
-       <Typography
-        variant="h4"
-        color={theme.palette.secondary[100]}
-        fontWeight="bold"
-        sx={{ mb: "5px" }}
+    <Box
+      sx={{ marginBottom: "2rem" }}
+    >
+      <Box
+        sx={{ marginBottom: "2rem" }}
       >
-        {title}
-      </Typography>
-      <Typography variant="h5" color={theme.palette.secondary[300]}>
-        {subtitle}
-      </Typography>
+        <Typography
+          variant="h4"
+          color={theme.palette.grey[1000]}
+          fontWeight="bold"
+          sx={{ mb: "5px" }}
+        >
+          {title}
+        </Typography>
+        <Typography variant="h5" color={theme.palette.grey[1000]}>
+          {subtitle}
+        </Typography>
+      </Box>
 
       <FlexBetween>
         <FlexBetween 
@@ -37,11 +43,19 @@ const ExplorePageHeader = ({ title, subtitle }) => {
           gap="3rem" 
           p="0.1rem 1.5rem"
         >
-          <InputBase placeholder="Search..." />
-          <IconButton>
-            <Search />
-          </IconButton>
-
+          <Box>
+            <InputBase placeholder="Search..."               
+              sx={{
+                border: "1px solid lightgrey",
+                borderRadius: "0.55rem",
+                padding: "0.5rem",
+              }}
+            />
+            <IconButton>
+              <Search />
+            </IconButton>
+          </Box>
+          
           <Box sx={{ minWidth: 120 }}>
             <FormControl fullWidth>
               <InputLabel>Category</InputLabel>
