@@ -3,7 +3,7 @@ import FlexBetween from 'components/FlexBetween';
 import { Search } from "@mui/icons-material";
 import React, { useState } from "react";
 
-const VendorPageHeader = ({ title, subtitle }) => {
+const ExplorePageHeader = ({ title, subtitle }) => {
   const theme = useTheme();
   const [category, setCategory] = useState("");
   const [filter, setFilter] = useState("");
@@ -79,4 +79,4 @@ const VendorPageHeader = ({ title, subtitle }) => {
   );
 };
 
-export default VendorPageHeader;
+export default ExplorePageHeader;

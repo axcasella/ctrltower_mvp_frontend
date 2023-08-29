@@ -14,8 +14,14 @@ export const api = createApi({
       providesTags: ["User"],
     }),
     getVendors: build.query({
-      query: () => "vendors",
+      query: (shipperID) => `vendors?shipperID=${shipperID}`,
       providesTags: ["Vendor"],
+    }),
+    getVendorByID: build.query({
+      query: ({vendorID, shipperID}) => {
+        return `vendors/${vendorID}?shipperID=${shipperID}`;
+     },
+     providesTags: ["Vendor"],
     }),
     getDashboard: build.query({
       query: () => "general/dashboard",
@@ -27,5 +33,6 @@ export const api = createApi({
 export const {
   useGetUserQuery,
   useGetVendorsQuery,
+  useGetVendorByIDQuery,
   useGetDashboardQuery,
 } = api;

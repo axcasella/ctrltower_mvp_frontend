@@ -13,8 +13,10 @@ import {
   Stack,
   Chip,
 } from "@mui/material";
-import VendorPageHeader from "components/VendorPageHeader";
+import ExplorePageHeader from "components/ExplorePageHeader";
 import { useGetVendorsQuery } from "state/api";
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useSelector } from "react-redux";
 
 const Vendor = ({
   _id,
@@ -30,9 +32,12 @@ const Vendor = ({
   email,
   website,
   complianceInfo,
+  shipperStats,
 }) => {
   const theme = useTheme();
   const [isExpanded, setIsExpanded] = useState(false);
+
+  const navigate = useNavigate();
 
   return (
     <Card
@@ -42,7 +47,17 @@ const Vendor = ({
         borderRadius: "0.55rem",
       }}
     >
-      <CardContent>
+      <CardContent
+         onClick={() => {
+          navigate(`/vendor/${_id}`);
+        }}
+        sx={{
+          cursor: "pointer",
+          "&:hover": {
+            backgroundColor: theme.palette.background.default,
+          },
+        }}
+      >
         {/* <Typography
           sx={{ fontSize: 14 }}
           color={theme.palette.secondary[700]}
@@ -57,7 +72,7 @@ const Vendor = ({
 
         <Typography sx={{ mb: "1.5rem" }} color={theme.palette.secondary[400]}>
           {/* ${Number(price).toFixed(2)} */}
-          $30000 - $50000
+          ${shipperStats.vestimateLowerRange} - ${shipperStats.vestimateUpperRange}
         </Typography>
         {/* <Rating value={complianceInfo.rating} readOnly /> */}
 
@@ -111,14 +126,17 @@ const Vendor = ({
 };
 
 const Vendors = () => {
-  const { data, isLoading } = useGetVendorsQuery();
+  const shipperID = useSelector(state => state.global.shipperID);
+
+  const { data, isLoading } = useGetVendorsQuery(shipperID);
+
   const isNonMobile = useMediaQuery("(min-width: 1000px)");
 
   console.log("data", data);
 
   return (
     <Box m="1.5rem 2.5rem">
-      <VendorPageHeader title="Explore" subtitle="" />
+      <ExplorePageHeader title="Explore" subtitle="" />
       {data || !isLoading ? (
         <Box
           mt="20px"
@@ -146,6 +164,7 @@ const Vendors = () => {
               email,
               website,
               complianceInfo,
+              shipperStats,
             }) => (
               <Vendor
                 key={_id}
@@ -156,6 +175,7 @@ const Vendors = () => {
                 description={description}
                 address={address}
                 complianceInfo={complianceInfo}
+                shipperStats={shipperStats}
                 city={city}
                 state={state}
                 zip={zip}
