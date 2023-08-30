@@ -140,12 +140,14 @@ const Vendors = () => {
     <Box sx={{
       padding: "1.5rem",
       backgroundColor: theme.palette.grey[100],
+      minHeight: "100vh"
     }}>
       <Box m="1rem 0.5rem"
         sx={{
           backgroundColor: "#ffffff",
           padding: "1.5rem",   
           borderRadius: "0.55rem",
+          minHeight: "80vh"
         }}
       >
         <ExplorePageHeader title="Explore" subtitle="" />
