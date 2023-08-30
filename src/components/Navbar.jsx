@@ -16,6 +16,7 @@ const Navbar = ({user}) => {
 
   const { pathname } = useLocation();
   const [pageName, setPageName] = useState("");
+  console.log("pathname", pathname);
 
   const [anchorEl, setAnchorEl] = useState(null);
   const isOpen = Boolean(anchorEl);
@@ -23,7 +24,13 @@ const Navbar = ({user}) => {
   const handleClose = () => setAnchorEl(null);
 
   useEffect(() => {
-    setPageName(pathname.substring(1));
+    // if page name starts with "/vendor/", then set page name to "Vendor Details"
+    // else set page name to capitalized pathname
+    if (pathname.startsWith("/vendor/")) {
+      setPageName("Vendor Details");
+    } else {
+      setPageName(pathname.substring(1));
+    }
   }, [pathname]);
 
   return <AppBar
@@ -42,10 +49,6 @@ const Navbar = ({user}) => {
           gap="3rem" 
           p="0.1rem 1.5rem"
         >
-          {/* <InputBase placeholder="Search..." />
-          <IconButton>
-            <Search />
-          </IconButton> */}
           <h2>{capitalizePathname(pageName)}</h2>
 
         </FlexBetween>
