@@ -23,6 +23,26 @@ export const api = createApi({
      },
      providesTags: ["Vendor"],
     }),
+    searchVendors: build.query({
+      query: (name, pageNumber, pageSize) => {
+        let query = `vendors/fmcsa/search?name=${name}`;
+        
+        if (pageNumber) {
+          query += `&pageNumber=${pageNumber}`;
+        }
+    
+        if (pageSize) {
+          query += `&pageSize=${pageSize}`;
+        }
+    
+        return query;
+      },
+      providesTags: ["Vendor"],
+    }),
+    getVendorByUSDOTFromFMCSA: build.query({
+      query: (usdot) => `vendors/fmcsa/${usdot}`,
+      providesTags: ["Vendor"],
+    }),
     getDashboard: build.query({
       query: () => "general/dashboard",
       providesTags: ["Dashboard"],
@@ -35,4 +55,6 @@ export const {
   useGetVendorsQuery,
   useGetVendorByIDQuery,
   useGetDashboardQuery,
+  useSearchVendorsQuery,
+  useGetVendorByUSDOTFromFMCSAQuery,
 } = api;

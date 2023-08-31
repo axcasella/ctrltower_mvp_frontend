@@ -14,25 +14,24 @@ import {
   Chip,
 } from "@mui/material";
 import ExplorePageHeader from "components/ExplorePageHeader";
-import { useGetVendorsQuery } from "state/api";
+import { useGetVendorsQuery, useSearchVendorsQuery } from "state/api";
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useSelector } from "react-redux";
+import { capitalizeFirstLetter } from "helpers";
+import FlexBetween from "components/FlexBetween";
 
 const Vendor = ({
-  _id,
-  name,
-  type,
-  description,
-  tags,
-  address,
-  city,
-  state,
-  zip,
-  phone_number,
-  email,
-  website,
-  complianceInfo,
-  shipperStats,
+  legal_name,
+  dba_name,
+  entity_type,
+  mailing_address,
+  mc_mx_ff_numbers,
+  operation_classification,
+  operating_status,
+  phone,
+  usdot,
+  cargo_carried,
+  carrier_operation
 }) => {
   const theme = useTheme();
   const [isExpanded, setIsExpanded] = useState(false);
@@ -49,7 +48,7 @@ const Vendor = ({
     >
       <CardContent
          onClick={() => {
-          navigate(`/vendor/${_id}`);
+          navigate(`/vendor/${usdot}`);
         }}
         sx={{
           cursor: "pointer",
@@ -58,26 +57,29 @@ const Vendor = ({
           },
         }}
       >
-        {/* <Typography
-          sx={{ fontSize: 14 }}
+        <Typography
+          sx={{ fontSize: 14, mb: "0.5rem" }}
           color={theme.palette.secondary[700]}
           gutterBottom
         >
-          {type}
-        </Typography> */}
-        <Typography variant="h4" component="div">
-          {name}
+          {capitalizeFirstLetter(entity_type)}
         </Typography>
-        <Typography variant="body2">{description}</Typography>
+        <Typography sx={{mb: "0.2rem"}} variant="h4" component="div">
+          {/* Some don't have a doing business as name */}
+          {dba_name ? dba_name : legal_name}
+        </Typography>
+        <Typography sx={{mb: "1rem"}} variant="h6" component="div">
+          {/* Some don't have a doing business as name */}
+          USDOT - {usdot}
+        </Typography>
+        {/* <Typography variant="body2">{description}</Typography> */}
 
-        <Typography sx={{ mb: "1.5rem" }} color={theme.palette.secondary[400]}>
-          {/* ${Number(price).toFixed(2)} */}
+        {/* <Typography sx={{ mb: "1.5rem" }} color={theme.palette.secondary[400]}>
           ${shipperStats.vestimateLowerRange} - ${shipperStats.vestimateUpperRange}
-        </Typography>
-        {/* <Rating value={complianceInfo.rating} readOnly /> */}
+        </Typography> */}
 
-        <Stack direction="row" spacing={1}>
-          {tags.map((tag) => (
+        <Stack direction="row" spacing={1} useFlexGap flexWrap="wrap">
+          {cargo_carried.map((tag) => (
             <Chip label={tag} 
               sx={{
                 height: "1.5rem",
@@ -109,16 +111,34 @@ const Vendor = ({
         }}
       >
         <CardContent>
-          <Typography>address: {address}</Typography>
-          <Typography>city: {city}</Typography>
-          <Typography>state: {state}</Typography>
-          <Typography>Phone: {phone_number}</Typography>
-          <Typography>
-            Email: {email}
-          </Typography>
-          <Typography>
-            Website: {website}
-          </Typography>
+          <Box sx={{display: "flex", alignItems: "left"}}> 
+            <Typography sx={{fontWeight: "bold", mr: "0.5rem"}}>Legal name:</Typography> 
+            <Typography>{legal_name}</Typography>
+          </Box>
+          <Box sx={{display: "flex", alignItems: "left"}}> 
+            <Typography sx={{fontWeight: "bold", mr: "0.5rem"}}>Phone: </Typography> 
+            <Typography>{phone}</Typography>
+          </Box>
+          <Box sx={{display: "flex", alignItems: "left"}}> 
+            <Typography sx={{fontWeight: "bold", mr: "0.5rem"}}>Address: </Typography> 
+            <Typography>{mailing_address}</Typography>
+          </Box>
+          <Box sx={{display: "flex", alignItems: "left"}}> 
+            <Typography sx={{fontWeight: "bold", mr: "0.5rem"}}>MC/MX/FF: </Typography> 
+            <Typography>{mc_mx_ff_numbers || "Not available"}</Typography>
+          </Box>
+          <Box sx={{display: "flex", alignItems: "left"}}> 
+            <Typography sx={{fontWeight: "bold", mr: "0.5rem"}}>Carrier operation: </Typography> 
+            <Typography>{carrier_operation}</Typography>
+          </Box>
+          <Box sx={{display: "flex", alignItems: "left"}}> 
+            <Typography sx={{fontWeight: "bold", mr: "0.5rem"}}>Operating status:</Typography> 
+            <Typography>{operating_status}</Typography>
+          </Box>
+          <Box sx={{display: "flex", alignItems: "left"}}> 
+            <Typography sx={{fontWeight: "bold", mr: "0.5rem"}}>Operation classification: </Typography> 
+            <Typography>{operation_classification}</Typography>
+          </Box>
         </CardContent>
       </Collapse>
     </Card>
@@ -128,9 +148,10 @@ const Vendor = ({
 const Vendors = () => {
   const theme = useTheme();
 
-  const shipperID = useSelector(state => state.global.shipperID);
+  // don't need shipper ID for now
+  // const shipperID = useSelector(state => state.global.shipperID);
 
-  const { data, isLoading } = useGetVendorsQuery(shipperID);
+  const { data, isLoading } = useSearchVendorsQuery("A");
 
   const isNonMobile = useMediaQuery("(min-width: 1000px)");
 
@@ -163,39 +184,33 @@ const Vendors = () => {
               "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
             }}
           >
-            {data.map(
+            {data.data.map(
               ({
-                _id,
-                name,
-                type,
-                description,
-                tags,
-                address,
-                city,
-                state,
-                zip,
-                phone_number,
-                email,
-                website,
-                complianceInfo,
-                shipperStats,
+                legal_name,
+                dba_name,
+                entity_type,
+                mailing_address,
+                mc_mx_ff_numbers,
+                operation_classification,
+                operating_status,
+                phone,
+                usdot,
+                cargo_carried,
+                carrier_operation
               }) => (
                 <Vendor
-                  key={_id}
-                  _id={_id}
-                  name={name}
-                  type={type}
-                  tags={tags}
-                  description={description}
-                  address={address}
-                  complianceInfo={complianceInfo}
-                  shipperStats={shipperStats}
-                  city={city}
-                  state={state}
-                  zip={zip}
-                  phone_number={phone_number}
-                  email={email}
-                  website={website}
+                  key={usdot}
+                  legal_name={legal_name}
+                  dba_name={dba_name}
+                  entity_type={entity_type}
+                  mailing_address={mailing_address}
+                  mc_mx_ff_numbers={mc_mx_ff_numbers}
+                  operation_classification={operation_classification}
+                  operating_status={operating_status}
+                  phone={phone}
+                  usdot={usdot}
+                  cargo_carried={cargo_carried}
+                  carrier_operation={carrier_operation}
                 />
               )
             )}
