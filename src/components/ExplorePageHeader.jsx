@@ -2,9 +2,23 @@ import { Typography, Box, useTheme, InputBase, IconButton, Select, MenuItem, For
 import FlexBetween from 'components/FlexBetween';
 import { Search } from "@mui/icons-material";
 import React, { useState } from "react";
+import { InputAdornment } from "@mui/material";
 
-const ExplorePageHeader = ({ title, subtitle }) => {
+const ExplorePageHeader = ({ title, subtitle, onSearchButtonClick }) => {
   const theme = useTheme();
+
+  // Search
+  const [localSearchTerm, setLocalSearchTerm] = useState("");
+
+  const handleSearchChange = (e) => {
+    setLocalSearchTerm(e.target.value);
+  };
+
+  const handleSearchClick = (e) => {
+    e.preventDefault();
+    onSearchButtonClick(localSearchTerm);
+  };
+
   const [category, setCategory] = useState("");
   const [filter, setFilter] = useState("");
 
@@ -38,20 +52,29 @@ const ExplorePageHeader = ({ title, subtitle }) => {
 
       <FlexBetween>
         <FlexBetween 
-          // backgroundColor={theme.palette.background.alt} 
-          // borderRadius="9px" 
           gap="3rem" 
           p="0.1rem 1.5rem"
         >
-          <Box>
-            <InputBase placeholder="Search..."               
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              border: "1px solid lightgrey",
+              borderRadius: "0.55rem",
+              padding: "0.5rem",
+              pl: "1rem",
+            }}
+          >
+            <InputBase 
+              placeholder="Search..."  
+              value={localSearchTerm}             
+              onChange={handleSearchChange}         
+              fullWidth
               sx={{
-                border: "1px solid lightgrey",
-                borderRadius: "0.55rem",
-                padding: "0.5rem",
+                flex: 1, // to ensure the input takes full width
               }}
             />
-            <IconButton>
+            <IconButton onClick={handleSearchClick}>
               <Search />
             </IconButton>
           </Box>

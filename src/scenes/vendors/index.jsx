@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Box,
   Card,
@@ -12,6 +12,7 @@ import {
   useMediaQuery,
   Stack,
   Chip,
+  Pagination
 } from "@mui/material";
 import ExplorePageHeader from "components/ExplorePageHeader";
 import { useGetVendorsQuery, useSearchVendorsQuery } from "state/api";
@@ -147,15 +148,21 @@ const Vendor = ({
 
 const Vendors = () => {
   const theme = useTheme();
-
-  // don't need shipper ID for now
-  // const shipperID = useSelector(state => state.global.shipperID);
-
-  const { data, isLoading } = useSearchVendorsQuery("A");
-
   const isNonMobile = useMediaQuery("(min-width: 1000px)");
 
+  const [pageNumber, setPageNumber] = useState(1);
+  const [searchTerm, setSearchTerm] = useState("A");
+  const { data, error, isLoading } = useSearchVendorsQuery({name: searchTerm, pageNumber});
+
   console.log("data", data);
+
+  const setPage = (e, page) => {
+    setPageNumber(page);
+  }
+
+  const updateSearchTerm = (term) => {
+    setSearchTerm(term);
+  }
 
   return (
     <Box sx={{
@@ -171,49 +178,64 @@ const Vendors = () => {
           minHeight: "80vh"
         }}
       >
-        <ExplorePageHeader title="Explore" subtitle="" />
+        <ExplorePageHeader title="Explore" subtitle="" onSearchButtonClick={updateSearchTerm} />
         {data || !isLoading ? (
-          <Box
-            mt="20px"
-            display="grid"
-            gridTemplateColumns="repeat(3, minmax(0, 1fr))"
-            justifyContent="space-between"
-            rowGap="20px"
-            columnGap="1.33%"
-            sx={{
-              "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
-            }}
-          >
-            {data.data.map(
-              ({
-                legal_name,
-                dba_name,
-                entity_type,
-                mailing_address,
-                mc_mx_ff_numbers,
-                operation_classification,
-                operating_status,
-                phone,
-                usdot,
-                cargo_carried,
-                carrier_operation
-              }) => (
-                <Vendor
-                  key={usdot}
-                  legal_name={legal_name}
-                  dba_name={dba_name}
-                  entity_type={entity_type}
-                  mailing_address={mailing_address}
-                  mc_mx_ff_numbers={mc_mx_ff_numbers}
-                  operation_classification={operation_classification}
-                  operating_status={operating_status}
-                  phone={phone}
-                  usdot={usdot}
-                  cargo_carried={cargo_carried}
-                  carrier_operation={carrier_operation}
-                />
-              )
-            )}
+          <Box>
+            <Typography variant="h5" fontWeight="bold">
+              Found {data.totalResults} results
+            </Typography>
+
+            <Box
+              mt="20px"
+              display="grid"
+              gridTemplateColumns="repeat(3, minmax(0, 1fr))"
+              justifyContent="space-between"
+              rowGap="20px"
+              columnGap="1.33%"
+              sx={{
+                mb: "2rem",
+                "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
+              }}
+            >
+              {data.data.map(
+                ({
+                  legal_name,
+                  dba_name,
+                  entity_type,
+                  mailing_address,
+                  mc_mx_ff_numbers,
+                  operation_classification,
+                  operating_status,
+                  phone,
+                  usdot,
+                  cargo_carried,
+                  carrier_operation
+                }) => (
+                  <Vendor
+                    key={usdot}
+                    legal_name={legal_name}
+                    dba_name={dba_name}
+                    entity_type={entity_type}
+                    mailing_address={mailing_address}
+                    mc_mx_ff_numbers={mc_mx_ff_numbers}
+                    operation_classification={operation_classification}
+                    operating_status={operating_status}
+                    phone={phone}
+                    usdot={usdot}
+                    cargo_carried={cargo_carried}
+                    carrier_operation={carrier_operation}
+                  />
+                )
+              )}
+            </Box>
+            
+            <Pagination 
+              count={data.totalPages} 
+              variant="outlined" 
+              shape="rounded"
+              page={pageNumber}
+              onChange={setPage}
+            />
           </Box>
         ) : (
           <>Loading...</>
