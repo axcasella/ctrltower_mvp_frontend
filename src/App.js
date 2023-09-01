@@ -24,7 +24,7 @@ function App() {
               <Route path="/" element={<Navigate to="/dashboard" replace /> } />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/explore" element={<Vendors />} />
-              <Route path="/vendor/:id" element={<VendorDetails />} />
+              <Route path="/vendor/:usdot" element={<VendorDetails />} />
             </Route>
           </Routes>
         </ThemeProvider>
