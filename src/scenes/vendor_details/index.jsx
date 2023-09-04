@@ -17,19 +17,18 @@ const VendorDetails = () => {
   const { data, isLoading } = useGetVendorByUSDOTFromFMCSAQuery(usdot);
   console.log("vendor detail data", data);
 
-  const totalDriverInspections = data && parseInt(data.united_states_inspections.driver.inspections || 0)+parseInt(data.canada_inspections.driver.inspections || 0);
-  const totalDriverInspectionsFailed = data && parseInt(data.united_states_inspections.driver.out_of_service || 0) + parseInt(data.canada_inspections.driver.out_of_service || 0);
+  const totalDriverInspections = data?.saferData && parseInt(data?.saferData.united_states_inspections.driver.inspections || 0)+parseInt(data?.saferData.canada_inspections.driver.inspections || 0);
+  const totalDriverInspectionsFailed = data?.saferData && parseInt(data?.saferData.united_states_inspections.driver.out_of_service || 0) + parseInt(data?.saferData.canada_inspections.driver.out_of_service || 0);
   const totalDriverInspectionsPassed = totalDriverInspections-totalDriverInspectionsFailed;
 
-  const totalVehicleInspections = data && parseInt(data.united_states_inspections.vehicle.inspections || 0)+parseInt(data.canada_inspections.vehicle.inspections || 0);
-  const totalVehicleInspectionsFailed = data && parseInt(data.united_states_inspections.vehicle.out_of_service || 0) + parseInt(data.canada_inspections.vehicle.out_of_service || 0);
+  const totalVehicleInspections = data?.saferData && parseInt(data?.saferData.united_states_inspections.vehicle.inspections || 0)+parseInt(data?.saferData.canada_inspections.vehicle.inspections || 0);
+  const totalVehicleInspectionsFailed = data?.saferData && parseInt(data?.saferData.united_states_inspections.vehicle.out_of_service || 0) + parseInt(data?.saferData.canada_inspections.vehicle.out_of_service || 0);
   const totalVehicleInspectionsPassed = totalVehicleInspections-totalVehicleInspectionsFailed;
 
-  const totalTow = data && parseInt(data.united_states_crashes.tow || 0) + parseInt(data.canada_crashes.tow || 0);
-  const totalFatal = data && parseInt(data.united_states_crashes.fatal || 0) + parseInt(data.canada_crashes.fatal || 0);
-  const totalInjury = data && parseInt(data.united_states_crashes.injury || 0) + parseInt(data.canada_crashes.injury || 0);
-  const totalCrashes = data && parseInt(data.united_states_crashes.total || 0) + parseInt(data.canada_crashes.total || 0);
-
+  const totalTow = data?.saferData && parseInt(data?.saferData.united_states_crashes.tow || 0) + parseInt(data?.saferData.canada_crashes.tow || 0);
+  const totalFatal = data?.saferData && parseInt(data?.saferData.united_states_crashes.fatal || 0) + parseInt(data?.saferData.canada_crashes.fatal || 0);
+  const totalInjury = data?.saferData && parseInt(data?.saferData.united_states_crashes.injury || 0) + parseInt(data?.saferData.canada_crashes.injury || 0);
+  const totalCrashes = data?.saferData && parseInt(data?.saferData.united_states_crashes.total || 0) + parseInt(data?.saferData.canada_crashes.total || 0);
 
   const theme = useTheme();
   const [question, askQuestion] = useState("");
@@ -50,7 +49,7 @@ const VendorDetails = () => {
           borderRadius: "0.55rem",
           minHeight: "80vh"
         }}>
-          {data || !isLoading ? (
+          {data && !isLoading ? (
             <Box> 
               <Box sx={{ mb: "25px" }}>
                 <FlexBetween>
@@ -60,11 +59,11 @@ const VendorDetails = () => {
                     fontWeight="bold"
                     sx={{ mb: "5px" }}
                   >
-                    {data.dba_name ? data.dba_name : data.legal_name}
+                    {data.saferData.dba_name ? data.saferData.dba_name : data.saferData.legal_name}
                   </Typography>
 
                   <Stack direction="row" spacing={1} useFlexGap flexWrap="wrap">
-                    {data.cargo_carried.map((tag) => (
+                    {data.saferData.cargo_carried.map((tag) => (
                       <Chip label={tag} 
                         sx={{
                           height: "2rem",
@@ -102,13 +101,13 @@ const VendorDetails = () => {
                         
                         <Typography variant="h5" sx={{mb: "1rem", textAlign: "left"}}>
                             Legal name: &nbsp;
-                            <span style={{fontWeight: "bold"}}>{data.legal_name}</span>
+                            <span style={{fontWeight: "bold"}}>{data.saferData.legal_name}</span>
                         </Typography>
 
-                        {data.duns_number ? (
+                        {data.saferData.duns_number ? (
                           <Typography variant="h5" sx={{mb: "1rem", textAlign: "left"}}>
                             Duns number: &nbsp;
-                            <span style={{fontWeight: "bold"}}>{data.duns_number}</span>
+                            <span style={{fontWeight: "bold"}}>{data.saferData.duns_number}</span>
                         </Typography>
                         ) : (
                           ""
@@ -117,32 +116,32 @@ const VendorDetails = () => {
                         <FlexBetween>
                           <Typography variant="h5" sx={{mb: "1rem"}}>
                             USDOT: &nbsp;
-                            <span style={{fontWeight: "bold"}}>{data.usdot}</span>
+                            <span style={{fontWeight: "bold"}}>{data.saferData.usdot}</span>
                           </Typography>
                           <Typography variant="h5" sx={{mb: "1rem"}}>
                             MC/MX/FF: &nbsp;
-                            <span style={{fontWeight: "bold"}}>{data.mc_mx_ff ? data.mc_mx_ff : "Not Available"}</span>
+                            <span style={{fontWeight: "bold"}}>{data.saferData.mc_mx_ff ? data.saferData.mc_mx_ff : "Not Available"}</span>
                           </Typography>
                         </FlexBetween>
 
                         <FlexBetween>
                           <Typography variant="h5" sx={{mb: "1rem"}}>
                             Fleet size: &nbsp;
-                            <span style={{fontWeight: "bold"}}>{data.power_units}</span>
+                            <span style={{fontWeight: "bold"}}>{data.saferData.power_units}</span>
                           </Typography>
                           <Typography variant="h5" sx={{mb: "1rem"}}>
                             Drivers: &nbsp;
-                            <span style={{fontWeight: "bold"}}>{data.drivers}</span>
+                            <span style={{fontWeight: "bold"}}>{data.saferData.drivers}</span>
                           </Typography>
                           <Typography variant="h5" sx={{mb: "1rem"}}>
                             Phone: &nbsp;
-                            <span style={{fontWeight: "bold"}}>{data.phone}</span>
+                            <span style={{fontWeight: "bold"}}>{data.saferData.phone}</span>
                           </Typography>
                         </FlexBetween>
 
                         <Typography variant="h5" sx={{mb: "1rem"}}>
                           Mailing address: &nbsp;
-                          <span style={{fontWeight: "bold"}}>{data.mailing_address}</span>
+                          <span style={{fontWeight: "bold"}}>{data.saferData.mailing_address}</span>
                         </Typography>
                       </Box>
                       <Box
@@ -257,7 +256,7 @@ const VendorDetails = () => {
                                 SAFER Safety Rating
                               </Typography>
                               <Typography variant="h5" fontWeight="bold">
-                                {data.safety_rating? data.safety_rating : "Not Available"}
+                                {data.saferData.safety_rating? data.saferData.safety_rating : "Not Available"}
                               </Typography>
                             </Box>
 
@@ -277,7 +276,7 @@ const VendorDetails = () => {
                                 Operation classification
                               </Typography>
                               <Typography variant="h5" fontWeight="bold">
-                                {data.operation_classification[0]? data.operation_classification[0] : "Not Available"}
+                                {data.saferData.operation_classification[0]? data.saferData.operation_classification[0] : "Not Available"}
                               </Typography>
                             </Box>
 
@@ -286,19 +285,19 @@ const VendorDetails = () => {
                                 Operation Status
                               </Typography>
                               <Typography variant="h5" fontWeight="bold">
-                                {data.operating_status? data.operating_status : "Not Available"}
+                                {data.saferData.operating_status? data.saferData.operating_status : "Not Available"}
                               </Typography>
                             </Box>
                           </FlexBetween>
 
-                          {data.mcs_150_mileage_year.milage ? (
+                          {data.saferData.mcs_150_mileage_year.milage ? (
                             <FlexBetween>
                               <Box sx={{m: "1rem"}}>
                                 <Typography sx={{mb: "0.5rem"}}>
                                   MCS 150 Milage (Year)
                                 </Typography>
                                 <Typography variant="h5" fontWeight="bold">
-                                  {data.mcs_150_mileage_year.mileage} ({data.mcs_150_mileage_year.year})
+                                  {data.saferData.mcs_150_mileage_year.mileage} ({data.saferData.mcs_150_mileage_year.year})
                                 </Typography>
                               </Box>
 
@@ -307,13 +306,33 @@ const VendorDetails = () => {
                                   MCS 150 form date
                                 </Typography>
                                 <Typography variant="h5" fontWeight="bold">
-                                  {data.mcs_150_form_date}
+                                  {data.saferData.mcs_150_form_date}
                                 </Typography>
                               </Box>
                             </FlexBetween>
                           ) : (
                             ""
                           )}
+
+                          <FlexBetween>
+                            <Box sx={{m: "1rem"}}>
+                              <Typography variant="h5" sx={{mb: "0.5rem"}}>
+                                BI/PD insurance 
+                              </Typography>
+                              <Typography variant="h5" fontWeight="bold">
+                                {data.mobileFMCSAData.content.carrier.bondInsuranceOnFile? data.mobileFMCSAData.content.carrier.bipdInsurnaceOnFile : "Not Available"}
+                              </Typography>
+                            </Box>
+
+                            <Box sx={{m: "1rem"}}>
+                              <Typography variant="h5" sx={{mb: "0.5rem"}}>
+                                Cargo insurance
+                              </Typography>
+                              <Typography variant="h5" fontWeight="bold">
+                                {data.mobileFMCSAData.content.carrier.cargoInsuranceOnFile? data.mobileFMCSAData.content.carrier.cargoInsuranceOnFile : "Not Available"}
+                              </Typography>
+                            </Box>
+                          </FlexBetween>
                         </Box>
                       </Box>
 
