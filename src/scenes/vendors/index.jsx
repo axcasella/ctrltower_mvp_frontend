@@ -181,7 +181,7 @@ const Vendors = () => {
         <ExplorePageHeader title="Explore" subtitle="" onSearchButtonClick={updateSearchTerm} />
         {data || !isLoading ? (
           <Box>
-            <Typography variant="h5" fontWeight="bold">
+            <Typography variant="h5" fontWeight="600">
               Found {data.totalResults} results
             </Typography>
 

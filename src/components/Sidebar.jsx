@@ -28,6 +28,8 @@ import FlexBetween from './FlexBetween';
 import profileImage from "assets/profile.png"
 import { Draw } from '@mui/icons-material';
 
+import logoImage from "assets/ctrltower_logo.png"
+
 const navItems = [
   {
     text: "Dashboard",
@@ -81,14 +83,18 @@ const Sidebar = ({
         }}
       >
         <Box width="100%">
-          <Box m="1.5rem 2rem 2rem 3rem">
-            <FlexBetween color={theme.palette.grey[1000]}>
-              <Box display="flex" alignItems="center" gap="0.5rem">
-                <Typography variant="h3" fontWeight="bold">
-                  CtrlTower
-                </Typography>
-              </Box>
-            </FlexBetween>  
+          <Box m="1.5rem" ml="4rem" display="flex" alignItems="center" gap="0.75rem">
+            <Box
+                component="img"
+                alt=""
+                src={logoImage}
+                height="32.46px"
+                width="42.49px"
+                sx={{ objectFit: "cover" }}
+              />
+            <Typography variant="h2" fontWeight="bold">
+              ctrltower
+            </Typography>
           </Box>
         
           <List>
@@ -127,8 +133,8 @@ const Sidebar = ({
           </List>
         </Box>
 
-        <Box position="absolute" bottom="2rem">
-            <Divider />
+        <Box position="absolute" bottom="2rem" sx={{backgroundColor: "#ffffff"}}>
+            <Divider sx={{minWidth: "100vw"}}/>
             <List>
               <ListItem>
                 <ListItemIcon sx={{ml: "2rem", color: theme.palette.grey[900]}}>
@@ -150,7 +156,7 @@ const Sidebar = ({
                   />
                   <Box textAlign="left">
                     <Typography
-                      fontWeight="bold"
+                      fontWeight="600"
                       fontSize="0.9rem"
                       sx={{ color: theme.palette.secondary[100] }}
                     >

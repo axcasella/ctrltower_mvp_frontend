@@ -49,7 +49,7 @@ const Navbar = ({user}) => {
           gap="3rem" 
           p="0.1rem 1.5rem"
         >
-          <h2>{capitalizePathname(pageName)}</h2>
+          <Typography fontSize="20px" fontWeight="600">{capitalizePathname(pageName)}</Typography>
 
         </FlexBetween>
       </FlexBetween>
@@ -85,15 +85,15 @@ const Navbar = ({user}) => {
               />
               <Box textAlign="left">
                 <Typography
-                  fontWeight="bold"
+                  fontWeight="600"
                   fontSize="0.85rem"
-                  sx={{ color: theme.palette.secondary[100] }}
+                  sx={{ color: "black" }}
                 >
                   {user.name}
                 </Typography>
                 <Typography
                   fontSize="0.75rem"
-                  sx={{ color: theme.palette.secondary[200] }}
+                  sx={{ color: "black" }}
                 >
                   {user.occupation}
                 </Typography>

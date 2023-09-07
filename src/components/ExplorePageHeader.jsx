@@ -40,7 +40,7 @@ const ExplorePageHeader = ({ title, subtitle, onSearchButtonClick }) => {
         <Typography
           variant="h4"
           color={theme.palette.grey[1000]}
-          fontWeight="bold"
+          fontWeight="600"
           sx={{ mb: "5px" }}
         >
           {title}

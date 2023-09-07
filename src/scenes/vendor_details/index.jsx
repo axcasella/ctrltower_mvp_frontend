@@ -56,7 +56,7 @@ const VendorDetails = () => {
                   <Typography
                     variant="h3"
                     color={theme.palette.grey[1000]}
-                    fontWeight="bold"
+                    fontWeight="600"
                     sx={{ mb: "5px" }}
                   >
                     {data.saferData.dba_name ? data.saferData.dba_name : data.saferData.legal_name}
@@ -95,7 +95,7 @@ const VendorDetails = () => {
                           mb: "1.5rem"
                         }}
                       > 
-                        <Typography variant="h4" sx={{textAlign: "left", mb: "1rem"}} fontWeight="bold">
+                        <Typography variant="h4" sx={{textAlign: "left", mb: "1rem"}} fontWeight="600">
                           General info
                         </Typography>
                         
@@ -139,7 +139,7 @@ const VendorDetails = () => {
                           </Typography>
                         </FlexBetween>
 
-                        <Typography variant="h5" sx={{mb: "1rem"}}>
+                        <Typography variant="h5" sx={{mb: "1rem"}} textAlign="left">
                           Mailing address: &nbsp;
                           <span style={{fontWeight: "bold"}}>{data.saferData.mailing_address}</span>
                         </Typography>
@@ -160,7 +160,7 @@ const VendorDetails = () => {
                           VESTIMATE CONTRACT PRICE
                         </Typography>
                       
-                        <Typography variant="h4" fontWeight="bold" sx={{mb: "0.5rem"}}>
+                        <Typography variant="h4" fontWeight="600" sx={{mb: "0.5rem"}}>
                           ${20000}K - ${30000}K
                         </Typography>
                       
@@ -185,7 +185,7 @@ const VendorDetails = () => {
                             <Typography sx={{fontSize: "13px", mb: "0.5rem"}}>
                               VEST.CLOSE TIME
                             </Typography>
-                            <Typography variant="h5" fontWeight="bold">
+                            <Typography variant="h5" fontWeight="600">
                               {27} Days
                             </Typography>
                           </Box>
@@ -203,7 +203,7 @@ const VendorDetails = () => {
                             <Typography sx={{fontSize: "13px", mb: "0.5rem"}}>
                               VEST.SAVINGS
                             </Typography>
-                            <Typography variant="h4" fontWeight="bold">
+                            <Typography variant="h4" fontWeight="600">
                               {17}%
                             </Typography>
                           </Box>
@@ -221,7 +221,7 @@ const VendorDetails = () => {
                             <Typography sx={{fontSize: "13px", mb: "0.5rem"}}>
                               VEST.MKT.SHARE
                             </Typography>
-                            <Typography variant="h4" fontWeight="bold">
+                            <Typography variant="h4" fontWeight="600">
                               {8}%
                             </Typography>
                           </Box>
@@ -245,7 +245,7 @@ const VendorDetails = () => {
                       minWidth: "35rem"
                     }}>
                       <Box sx={{ mb: "2rem"}}>
-                        <Typography variant="h4" sx={{textAlign: "left", mb: "1rem"}} fontWeight="bold">
+                        <Typography variant="h4" sx={{textAlign: "left", mb: "1rem"}} fontWeight="600">
                           Compliance
                         </Typography>
 
@@ -255,7 +255,7 @@ const VendorDetails = () => {
                               <Typography variant="h5" sx={{mb: "0.5rem"}}>
                                 SAFER Safety Rating
                               </Typography>
-                              <Typography variant="h5" fontWeight="bold">
+                              <Typography variant="h5" fontWeight="600">
                                 {data.saferData.safety_rating? data.saferData.safety_rating : "Not Available"}
                               </Typography>
                             </Box>
@@ -264,7 +264,7 @@ const VendorDetails = () => {
                               <Typography variant="h5" sx={{mb: "0.5rem"}}>
                                 D&B Verification
                               </Typography>
-                              <Typography variant="h5" fontWeight="bold">
+                              <Typography variant="h5" fontWeight="600">
                                 Passed
                               </Typography>
                             </Box>
@@ -275,7 +275,7 @@ const VendorDetails = () => {
                               <Typography variant="h5" sx={{mb: "0.5rem"}}>
                                 Operation classification
                               </Typography>
-                              <Typography variant="h5" fontWeight="bold">
+                              <Typography variant="h5" fontWeight="600">
                                 {data.saferData.operation_classification[0]? data.saferData.operation_classification[0] : "Not Available"}
                               </Typography>
                             </Box>
@@ -284,7 +284,7 @@ const VendorDetails = () => {
                               <Typography variant="h5" sx={{mb: "0.5rem"}}>
                                 Operation Status
                               </Typography>
-                              <Typography variant="h5" fontWeight="bold">
+                              <Typography variant="h5" fontWeight="600">
                                 {data.saferData.operating_status? data.saferData.operating_status : "Not Available"}
                               </Typography>
                             </Box>
@@ -296,7 +296,7 @@ const VendorDetails = () => {
                                 <Typography sx={{mb: "0.5rem"}}>
                                   MCS 150 Milage (Year)
                                 </Typography>
-                                <Typography variant="h5" fontWeight="bold">
+                                <Typography variant="h5" fontWeight="600">
                                   {data.saferData.mcs_150_mileage_year.mileage} ({data.saferData.mcs_150_mileage_year.year})
                                 </Typography>
                               </Box>
@@ -305,7 +305,7 @@ const VendorDetails = () => {
                                 <Typography variant="h5" sx={{mb: "0.5rem"}}>
                                   MCS 150 form date
                                 </Typography>
-                                <Typography variant="h5" fontWeight="bold">
+                                <Typography variant="h5" fontWeight="600">
                                   {data.saferData.mcs_150_form_date}
                                 </Typography>
                               </Box>
@@ -319,7 +319,7 @@ const VendorDetails = () => {
                               <Typography variant="h5" sx={{mb: "0.5rem"}}>
                                 BI/PD insurance 
                               </Typography>
-                              <Typography variant="h5" fontWeight="bold">
+                              <Typography variant="h5" fontWeight="600">
                                 {data.mobileFMCSAData.content.carrier.bondInsuranceOnFile? data.mobileFMCSAData.content.carrier.bipdInsurnaceOnFile : "Not Available"}
                               </Typography>
                             </Box>
@@ -328,7 +328,7 @@ const VendorDetails = () => {
                               <Typography variant="h5" sx={{mb: "0.5rem"}}>
                                 Cargo insurance
                               </Typography>
-                              <Typography variant="h5" fontWeight="bold">
+                              <Typography variant="h5" fontWeight="600">
                                 {data.mobileFMCSAData.content.carrier.cargoInsuranceOnFile? data.mobileFMCSAData.content.carrier.cargoInsuranceOnFile : "Not Available"}
                               </Typography>
                             </Box>
@@ -337,7 +337,7 @@ const VendorDetails = () => {
                       </Box>
 
                       <Box sx={{textAlign: "left", mb: "2rem"}}>
-                        <Typography variant="h4" sx={{mb: "1rem"}} fontWeight="bold">
+                        <Typography variant="h4" sx={{mb: "1rem"}} fontWeight="600">
                           Inspections in US & Canada (last 2 yrs)
                         </Typography>
                  
@@ -353,7 +353,7 @@ const VendorDetails = () => {
                       </Box>
 
                       <Box sx={{textAlign: "left"}}>
-                        <Typography variant="h4" sx={{mb: "1rem"}} fontWeight="bold">
+                        <Typography variant="h4" sx={{mb: "1rem"}} fontWeight="600">
                           Crashes in US and Canada 
                         </Typography>
 

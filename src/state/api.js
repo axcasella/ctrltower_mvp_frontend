@@ -47,6 +47,14 @@ export const api = createApi({
       query: () => "general/dashboard",
       providesTags: ["Dashboard"],
     }),
+    createRFPRequest: build.mutation({
+      query: (body) => ({
+        url: `rfp_management`,
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: ["Vendor", "RFP"],
+    }),
   }),
 });
 
