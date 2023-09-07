@@ -10,7 +10,8 @@ import {
   ListItemButton,
   ListItemText,
   Typography,
-  useTheme
+  useTheme,
+  Button
 } from "@mui/material";
 
 import AppsIcon from '@mui/icons-material/Apps';
@@ -20,12 +21,17 @@ import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlin
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import SupportAgentOutlinedIcon from '@mui/icons-material/SupportAgentOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
+import StoreOutlinedIcon from '@mui/icons-material/StoreOutlined';
+import BuildOutlinedIcon from '@mui/icons-material/BuildOutlined';
+import InsightsOutlinedIcon from '@mui/icons-material/InsightsOutlined';
+import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
+import CallOutlinedIcon from '@mui/icons-material/CallOutlined';
 
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import FlexBetween from './FlexBetween';
-import profileImage from "assets/profile.png"
+import supportPersonImage from "assets/support_person.png"
 import { Draw } from '@mui/icons-material';
 
 import logoImage from "assets/ctrltower_logo.png"
@@ -46,6 +52,22 @@ const navItems = [
   {
     text: "Spend Optimization",
     icon: <SpeedOutlinedIcon />,
+  },
+  {
+    text: "Workflow",
+    icon: <StoreOutlinedIcon />,
+  },
+  {
+    text: "Integrations",
+    icon: <BuildOutlinedIcon />,
+  },
+  {
+    text: "CT Intelligence",
+    icon: <InsightsOutlinedIcon />,
+  },
+  {
+    text: "Users",
+    icon: <PersonOutlineOutlinedIcon />,
   },
 ]
 
@@ -110,7 +132,7 @@ const Sidebar = ({
               const lcText = text.toLowerCase();
 
               return (
-                <ListItem key={text} disablePadding>
+                <ListItem key={text} sx={{pl: 0, pr: 0}}>
                   <ListItemButton 
                     onClick={() => {
                       navigate(`/${lcText}`);
@@ -122,10 +144,10 @@ const Sidebar = ({
                       color: active === lcText ? "white" : "grey"
                     }}
                   >
-                    <ListItemIcon sx={{ml: "2rem", color: active === lcText ? "white" : "grey"}}>
+                    <ListItemIcon sx={{ml: "2rem", color: active === lcText ? "#FFFFFF" : "#383A47"}}>
                       {icon}
                     </ListItemIcon>
-                    <ListItemText primary={text} />
+                    <ListItemText sx={{fontSize: "16px", fontWeight: "medium", color: active === lcText ? "#FFFFFF" : "#383A47",}} primary={text} />
                   </ListItemButton>
                 </ListItem>
               )
@@ -143,12 +165,12 @@ const Sidebar = ({
                 <ListItemText primary={"Need help with CtrlTower?"} />
               </ListItem>
               
-              <ListItem>
+              <ListItem sx={{p: 0}}>
                 <FlexBetween textTransform="none" gap="1rem" m="1.5rem 2rem 0 3rem">
                   <Box
                     component="img"
                     alt="profile"
-                    src={profileImage}
+                    src={supportPersonImage}
                     height="40px"
                     width="40px"
                     borderRadius="50%"
@@ -157,14 +179,14 @@ const Sidebar = ({
                   <Box textAlign="left">
                     <Typography
                       fontWeight="600"
-                      fontSize="0.9rem"
-                      sx={{ color: theme.palette.secondary[100] }}
+                      fontSize="16px"
+                      sx={{ color: "#383A47" }}
                     >
                       Jack R. Smith
                     </Typography>
                     <Typography
-                      fontSize="0.8rem"
-                      sx={{ color: theme.palette.secondary[200] }}
+                      fontSize="14px"
+                      sx={{ color: "#383A47" }}
                     >
                       Staff
                     </Typography>
@@ -172,15 +194,23 @@ const Sidebar = ({
                 </FlexBetween>
               </ListItem>
 
+              <ListItem sx={{mt: "0.5rem", ml: "2rem"}}>
+                <Button variant="contained" sx={{textTransform: "none", backgroundColor: "#131316", borderRadius: "8px", color: "white", fontSize: "15px", boxShadow: "none"}}>
+                  <CallOutlinedIcon />
+                  &nbsp;
+                  Schedule a call
+                </Button>
+              </ListItem>
+
               <ListItem>
-                <ListItemIcon sx={{ml: "2rem", color: "grey"}}>
+                <ListItemIcon sx={{ml: "2rem", color: "#383A47"}}>
                   <SettingsOutlinedIcon />
                 </ListItemIcon>
                 <ListItemText primary={"Settings"} />
               </ListItem>
 
               <ListItem>
-                <ListItemIcon sx={{ml: "2rem", color: "grey"}}>
+                <ListItemIcon sx={{ml: "2rem", color: "#383A47"}}>
                   <LogoutOutlinedIcon />
                 </ListItemIcon>
                 <ListItemText primary={"Log out"} />

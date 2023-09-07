@@ -3,7 +3,7 @@ import { LightModeOutlined, DarkModeOutlined, Menu as MenuIcon, Search, Settings
 import FlexBetween from 'components/FlexBetween';
 import { useDispatch } from 'react-redux'
 import { setMode } from "state";
-import profileImage from "assets/profile.png"
+import loggedInUserImage from "assets/logged_in_user.png"
 import { AppBar, IconButton, InputBase, Toolbar, useTheme, Button, Menu, MenuItem, Typography, Box } from '@mui/material';
 import { useLocation } from 'react-router-dom';
 import { capitalizePathname } from 'helpers';
@@ -77,7 +77,7 @@ const Navbar = ({user}) => {
               <Box
                 component="img"
                 alt="profile"
-                src={profileImage}
+                src={loggedInUserImage}
                 height="32px"
                 width="32px"
                 borderRadius="50%"
@@ -99,7 +99,7 @@ const Navbar = ({user}) => {
                 </Typography>
               </Box>
               <ArrowDropDownOutlined
-                sx={{ color: theme.palette.secondary[300], fontSize: "25px" }}
+                sx={{ color: "#383A47", fontSize: "25px" }}
               />
             </Button>
             <Menu
