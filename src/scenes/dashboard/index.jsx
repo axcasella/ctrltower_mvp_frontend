@@ -2,7 +2,8 @@ import React from 'react'
 import { Typography, Box, useTheme, Button, LinearProgress, TableContainer, TableHead, TableRow, TableBody, TableCell, Paper, Table, Stack, Chip } from "@mui/material";
 import DashboardPageHeader from 'components/DashboardPageHeader';
 import FlexBetween from 'components/FlexBetween';
-
+import DashboardTeamTasks from 'components/DashboardTeamTasks';
+import DashboardLoggedInUserTasks from 'components/DashboardLoggedInUserTasks';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ErrorIcon from '@mui/icons-material/Error';
 
@@ -200,7 +201,31 @@ const Dashboard = () => {
             backgroundColor: "#ffffff",
             p: "1.5rem",
             borderRadius: "0.75rem",
-            height: "23rem",
+            height: "22rem",
+            width: "28rem"
+            }}>
+              <FlexBetween>
+                <Typography fontSize="16px" fontWeight="600">Team Tasks</Typography>
+
+                <Box sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    
+                  }}>
+                    <Typography fontSize="14px" color="#26A0D5">View All</Typography>
+                    <ArrowForwardIcon sx={{ml: "0.25rem", fontSize: "14px", fontWeight: "bold", color: "#26A0D5"}}/>
+                </Box>
+              </FlexBetween>
+              
+              <DashboardTeamTasks tags={tags} taskName="Warehousing (#0911)"/>
+              <DashboardTeamTasks tags={tags} taskName="Savings Review"/>
+        </Box>
+
+        <Box sx={{
+            backgroundColor: "#ffffff",
+            p: "1.5rem",
+            borderRadius: "0.75rem",
+            height: "22rem",
             width: "28rem"
             }}>
               <FlexBetween>
@@ -215,61 +240,16 @@ const Dashboard = () => {
                     <ArrowForwardIcon sx={{ml: "0.25rem", fontSize: "14px", fontWeight: "bold", color: "#26A0D5"}}/>
                 </Box>
               </FlexBetween>
-              
-              <Box>
-                <FlexBetween mt="1rem">
-                  <Typography fontSize="12px">Warehousing (#0911)</Typography>
-                  <Stack direction="row" spacing={1} useFlexGap flexWrap="wrap">
-                    {tags.map((tag) => (
-                      <Chip label={tag} 
-                        sx={{
-                          height: "20px",
-                          borderRadius: "5px",
-                          color: "theme.palette.grey[1000]",
-                          fontSize: "10px",
-                          minWidth: "50px",
-                          backgroundColor: "#F4F5FA",
-                      }} />
-                    ))}
-                  </Stack>
-                </FlexBetween>
 
-                <Typography fontSize="14px" fontWeight="600">Upgrade Approval</Typography>
-
-                <FlexBetween>
-                  <Typography fontSize="12px">June 15 2022</Typography>
-                  
-                </FlexBetween>
-              </Box>
-              
+              <DashboardLoggedInUserTasks tags={tags} userName="Erin M." taskName="9/08 Update Pending"/>
+              <DashboardLoggedInUserTasks tags={tags} userName="Erin M." taskName="9/08 Update Pending"/>
         </Box>
 
         <Box sx={{
             backgroundColor: "#ffffff",
             p: "1.5rem",
             borderRadius: "0.75rem",
-            height: "23rem",
-            width: "28rem"
-            }}>
-              <FlexBetween>
-                <Typography fontSize="16px" fontWeight="600">My Tasks</Typography>
-
-                <Box sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    
-                  }}>
-                    <Typography fontSize="14px" color="#26A0D5">View All</Typography>
-                    <ArrowForwardIcon sx={{ml: "0.25rem", fontSize: "14px", fontWeight: "bold", color: "#26A0D5"}}/>
-                </Box>
-              </FlexBetween>
-        </Box>
-
-        <Box sx={{
-            backgroundColor: "#ffffff",
-            p: "1.5rem",
-            borderRadius: "0.75rem",
-            height: "23rem",
+            height: "22rem",
             width: "28rem"
             }}>
               <FlexBetween>
