@@ -4,6 +4,7 @@ import DashboardPageHeader from 'components/DashboardPageHeader';
 import FlexBetween from 'components/FlexBetween';
 import DashboardTeamTasks from 'components/DashboardTeamTasks';
 import DashboardLoggedInUserTasks from 'components/DashboardLoggedInUserTasks';
+import RecommendationsComponent from 'components/RecommendationsComponent';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ErrorIcon from '@mui/icons-material/Error';
 
@@ -264,6 +265,10 @@ const Dashboard = () => {
                     <ArrowForwardIcon sx={{ml: "0.25rem", fontSize: "14px", fontWeight: "bold", color: "#26A0D5"}}/>
                 </Box>
               </FlexBetween>
+
+              <RecommendationsComponent recommendationText="Save 10% on NFI last-mile contracts bv renegotiating contracts bv Julv 1st."/>
+              <RecommendationsComponent recommendationText="OTIF and SLA's have dropped with partner #301. Undate SLA'S"/>
+              <RecommendationsComponent recommendationText="Spot market rates for your lanes are 25% lower than usual for September."/>
         </Box>
       </FlexBetween>
     </Box>

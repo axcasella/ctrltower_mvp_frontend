@@ -141,13 +141,13 @@ const Sidebar = ({
 
                     sx = {{
                       backgroundColor: active === lcText ? theme.palette.secondary[300] : "transparent",
-                      color: active === lcText ? "white" : "grey"
+                      color: active === lcText ? "white" : "#383A47"
                     }}
                   >
                     <ListItemIcon sx={{ml: "2rem", color: active === lcText ? "#FFFFFF" : "#383A47"}}>
                       {icon}
                     </ListItemIcon>
-                    <ListItemText sx={{fontSize: "16px", fontWeight: "medium", color: active === lcText ? "#FFFFFF" : "#383A47",}} primary={text} />
+                    <ListItemText sx={{fontSize: "16px", fontWeight: active === lcText ? "600": "medium", color: active === lcText ? "#FFFFFF" : "#383A47",}} primary={text} />
                   </ListItemButton>
                 </ListItem>
               )
