@@ -47,7 +47,7 @@ const Dashboard = () => {
           p: "1.5rem",
           borderRadius: "0.75rem",
           height: "12rem",
-          width: "45rem"
+          width: "40rem"
           }}>
           <FlexBetween gap="1rem">
             <Box>
@@ -67,7 +67,7 @@ const Dashboard = () => {
           p: "1.5rem",
           borderRadius: "0.75rem",
           height: "12rem",
-          width: "45rem"
+          width: "50rem"
           }}>
           <FlexBetween>
             <Typography fontSize="18px" fontWeight="600">Savings Summary - 2022/2023</Typography>

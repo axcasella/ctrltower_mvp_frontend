@@ -132,7 +132,7 @@ const Sidebar = ({
               const lcText = text.toLowerCase();
 
               return (
-                <ListItem key={text} sx={{pl: 0, pr: 0}}>
+                <ListItem key={text} disablePadding sx={{height: "3rem"}}>
                   <ListItemButton 
                     onClick={() => {
                       navigate(`/${lcText}`);

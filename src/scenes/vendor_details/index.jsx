@@ -320,7 +320,9 @@ const VendorDetails = () => {
                                 BI/PD insurance 
                               </Typography>
                               <Typography variant="h5" fontWeight="600">
-                                {data.mobileFMCSAData.content.carrier.bondInsuranceOnFile? data.mobileFMCSAData.content.carrier.bipdInsurnaceOnFile : "Not Available"}
+                                {data.mobileFMCSAData.content.carrier.bipdInsuranceOnFile
+                                ? `${data.mobileFMCSAData.content.carrier.bipdInsuranceOnFile}K` 
+                                : "Not Available"}
                               </Typography>
                             </Box>
 
@@ -329,7 +331,11 @@ const VendorDetails = () => {
                                 Cargo insurance
                               </Typography>
                               <Typography variant="h5" fontWeight="600">
-                                {data.mobileFMCSAData.content.carrier.cargoInsuranceOnFile? data.mobileFMCSAData.content.carrier.cargoInsuranceOnFile : "Not Available"}
+                              {
+                                (data.mobileFMCSAData.content.carrier.cargoInsuranceOnFile && data.mobileFMCSAData.content.carrier.cargoInsuranceOnFile !== "0") 
+                                  ? data.mobileFMCSAData.content.carrier.cargoInsuranceOnFile 
+                                  : "Not Available"
+                              } 
                               </Typography>
                             </Box>
                           </FlexBetween>
