@@ -2,13 +2,13 @@ import { Typography, Box, useTheme, InputBase, IconButton, Select, MenuItem, For
 import FlexBetween from 'components/FlexBetween';
 import { Search } from "@mui/icons-material";
 import React, { useState } from "react";
-import { InputAdornment } from "@mui/material";
 
 const ExplorePageHeader = ({ title, subtitle, onSearchButtonClick }) => {
   const theme = useTheme();
 
   // Search
   const [localSearchTerm, setLocalSearchTerm] = useState("");
+  const [category, setCategory] = useState("");
 
   const handleSearchChange = (e) => {
     setLocalSearchTerm(e.target.value);
@@ -16,18 +16,12 @@ const ExplorePageHeader = ({ title, subtitle, onSearchButtonClick }) => {
 
   const handleSearchClick = (e) => {
     e.preventDefault();
-    onSearchButtonClick(localSearchTerm);
+    onSearchButtonClick(localSearchTerm, category);
   };
-
-  const [category, setCategory] = useState("");
-  const [filter, setFilter] = useState("");
 
   const handleChangeCategory = (event) => {
     setCategory(event.target.value);
-  };
-
-  const handleChangeFilter = (event) => {
-    setFilter(event.target.value);
+    onSearchButtonClick(localSearchTerm, event.target.value);
   };
 
   return (
@@ -79,36 +73,24 @@ const ExplorePageHeader = ({ title, subtitle, onSearchButtonClick }) => {
             </IconButton>
           </Box>
           
-          <Box sx={{ minWidth: 120 }}>
+          <Box sx={{ minWidth: 175 }}>
             <FormControl fullWidth>
-              <InputLabel>Category</InputLabel>
+              <InputLabel>Cargo carried</InputLabel>
               <Select
                 labelId="catetory-select-label"
                 id="category-select"
                 value={category}
                 label="Category"
                 onChange={handleChangeCategory}
+                sx={{ borderRadius: "0.55rem"}}
               >
-                <MenuItem value={"carrier"}>Carrier</MenuItem>
-                <MenuItem value={"warehouse"}>Warehouse</MenuItem>
-                <MenuItem value={"3pl"}>3PL</MenuItem>
+                <MenuItem value={"General Freight"}>General Freight</MenuItem>
+                <MenuItem value={"Metal: sheets, coils, rolls"}>Metal: sheets, coils, rolls</MenuItem>
+                <MenuItem value={"Fresh Produce"}>Fresh Produce</MenuItem>
+                <MenuItem value={"Grain, Feed, Hay"}>Grain, Feed, Hay</MenuItem>
+                <MenuItem value={"Meat"}>Meat</MenuItem>
               </Select>
             </FormControl> 
-          </Box>
- 
-          <Box sx={{ minWidth: 120 }}>
-            <FormControl fullWidth>
-              <InputLabel>Filter</InputLabel>
-
-              <Select
-                labelId="filter-select-label"
-                id="filter-select"
-                value={filter}
-                label="Filter"
-                onChange={handleChangeFilter}
-              >
-              </Select>
-            </FormControl>
           </Box>
         </FlexBetween>
       </FlexBetween>

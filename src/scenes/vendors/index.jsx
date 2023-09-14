@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Box,
   Card,
@@ -7,19 +7,15 @@ import {
   Collapse,
   Button,
   Typography,
-  Rating,
   useTheme,
   useMediaQuery,
   Stack,
   Chip,
-  Pagination
 } from "@mui/material";
 import ExplorePageHeader from "components/ExplorePageHeader";
-import { useGetVendorsQuery, useSearchVendorsQuery } from "state/api";
-import { useLocation, useNavigate } from 'react-router-dom';
-import { useSelector } from "react-redux";
+import { useSearchVendorsQuery } from "state/api";
+import { useNavigate } from 'react-router-dom';
 import { capitalizeFirstLetter } from "helpers";
-import FlexBetween from "components/FlexBetween";
 
 const Vendor = ({
   legal_name,
@@ -150,18 +146,36 @@ const Vendors = () => {
   const theme = useTheme();
   const isNonMobile = useMediaQuery("(min-width: 1000px)");
 
-  const [pageNumber, setPageNumber] = useState(1);
+  const [cursor, setCursor] = useState();  // Initially, no cursor.
+  const [cursorStack, setCursorStack] = useState([]);
   const [searchTerm, setSearchTerm] = useState("A");
-  const { data, error, isLoading } = useSearchVendorsQuery({name: searchTerm, pageNumber});
+  const [searchCategory, setSearchCategory] = useState();
 
+  const { data, error, isLoading } = useSearchVendorsQuery({name: searchTerm, cursor, cargoFilter: searchCategory});
   console.log("data", data);
 
-  const setPage = (e, page) => {
-    setPageNumber(page);
-  }
+  const goNext = () => {
+    // Push the current cursor to the stack
+    setCursorStack(prevStack => [...prevStack, cursor]);
+    
+    // Set the cursor to the next one from the data received
+    setCursor(data.cursor);
+  };  
 
-  const updateSearchTerm = (term) => {
+  const goBack = () => {
+    // Pop the last cursor from the stack
+    const newCursor = cursorStack.pop();
+    setCursor(newCursor);
+
+    // Update the stack state
+    setCursorStack([...cursorStack]);
+  };
+
+  const updateSearchTermAndCategory = (term, category) => {
     setSearchTerm(term);
+    setSearchCategory(category);
+    setCursor(null); // Reset cursor
+    setCursorStack([]); // Reset cursor stack;
   }
 
   return (
@@ -178,9 +192,9 @@ const Vendors = () => {
           minHeight: "80vh"
         }}
       >
-        <ExplorePageHeader title="Explore" subtitle="" onSearchButtonClick={updateSearchTerm} />
+        <ExplorePageHeader title="Explore" subtitle="" onSearchButtonClick={updateSearchTermAndCategory} />
         {data || !isLoading ? (
-          <Box>
+          <Box key={searchTerm}>
             <Typography variant="h5" fontWeight="600">
               Found {data.totalResults} results
             </Typography>
@@ -229,13 +243,8 @@ const Vendors = () => {
               )}
             </Box>
             
-            <Pagination 
-              count={data.totalPages} 
-              variant="outlined" 
-              shape="rounded"
-              page={pageNumber}
-              onChange={setPage}
-            />
+            <button disabled={cursorStack.length === 0} onClick={goBack}>Previous</button>
+            <button onClick={goNext}>Next</button>
           </Box>
         ) : (
           <>Loading...</>

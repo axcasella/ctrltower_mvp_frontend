@@ -1,3 +1,39 @@
+### Possible cargo filters
+
+"General Freight",
+"Metal: sheets, coils, rolls",
+"Fresh Produce",
+"Grain, Feed, Hay",
+"Meat",
+"Garbage/Refuse",
+"Commodities Dry Bulk",
+"Refrigerated Food",
+"Paper Products"
+“Logs, Poles, Beams, Lumber",
+"Building Materials",
+"Fresh Produce",
+"Grain, Feed, Hay",
+"US Mail",
+"Beverages",
+"Paper Products",
+"Agricultural/Farm Supplies",
+"Construction"
+"Motor Vehicles",
+"Machinery, Large Objects",
+"Intermodal Cont.",
+“Household Goods”,
+“Utilities”,
+“Passengers”,
+“Chemicals”,
+“Liquids/Gases”,
+“Drive/Tow away”,
+“Mobile Homes”,
+“Intrastate”,
+“Coal/Coke”,
+“Livestock”,
+“Water Well”,
+“Oilfield Equipment”
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

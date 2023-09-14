@@ -24,15 +24,19 @@ export const api = createApi({
      providesTags: ["Vendor"],
     }),
     searchVendors: build.query({
-      query: ({name, pageNumber, pageSize}) => {
+      query: ({name, pageSize, cargoFilter, cursor = null}) => {
         let query = `vendors/fmcsa/search?name=${name}`;
         
-        if (pageNumber) {
-          query += `&pageNumber=${pageNumber}`;
-        }
-    
         if (pageSize) {
           query += `&pageSize=${pageSize}`;
+        }
+    
+        if (cargoFilter) {
+          query += `&cargoFilter=${cargoFilter}`;
+        }
+    
+        if (cursor !== null) {
+          query += `&cursor=${cursor}`;
         }
     
         return query;
