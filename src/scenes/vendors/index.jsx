@@ -243,8 +243,27 @@ const Vendors = () => {
               )}
             </Box>
             
-            <button disabled={cursorStack.length === 0} onClick={goBack}>Previous</button>
-            <button onClick={goNext}>Next</button>
+            <Button 
+              variant="contained" 
+              disabled={cursorStack.length === 0} 
+              onClick={goBack}
+              sx={{
+                border: cursorStack.length === 0 ? 'none' : `1px solid ${theme.palette.primary[100]}`,
+                fontSize: "1rem", 
+                boxShadow: "none",
+                mr: "0.5rem"}}>
+                Previous
+            </Button>
+
+            <Button 
+              variant="contained" 
+              onClick={goNext}
+              sx={{
+                border: `1px solid ${theme.palette.primary[100]}`, 
+                fontSize: "1rem", 
+                boxShadow: "none"}}>
+                Next
+            </Button>
           </Box>
         ) : (
           <>Loading...</>

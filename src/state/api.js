@@ -25,6 +25,10 @@ export const api = createApi({
     }),
     searchVendors: build.query({
       query: ({name, pageSize, cargoFilter, cursor = null}) => {
+        if (!name) {
+          throw new Error("Name is required");
+        };
+
         let query = `vendors/fmcsa/search?name=${name}`;
         
         if (pageSize) {
