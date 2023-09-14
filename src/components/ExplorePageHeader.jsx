@@ -89,6 +89,31 @@ const ExplorePageHeader = ({ title, subtitle, onSearchButtonClick }) => {
                 <MenuItem value={"Fresh Produce"}>Fresh Produce</MenuItem>
                 <MenuItem value={"Grain, Feed, Hay"}>Grain, Feed, Hay</MenuItem>
                 <MenuItem value={"Meat"}>Meat</MenuItem>
+                <MenuItem value={"Garbage/Refuse"}>Garbage/Refuse</MenuItem>
+                <MenuItem value={"Commodities Dry Bulk"}>Commodities Dry Bulk</MenuItem>
+                <MenuItem value={"Refrigerated Food"}>Refrigerated Food</MenuItem>
+                <MenuItem value={"Paper Products"}>Paper Products</MenuItem>
+                <MenuItem value={"Logs, Poles, Beams, Lumber"}>Logs, Poles, Beams, Lumber</MenuItem>
+                <MenuItem value={"Building Materials"}>Building Materials</MenuItem>
+                <MenuItem value={"US Mail"}>US Mail</MenuItem>
+                <MenuItem value={"Beverages"}>Beverages</MenuItem>
+                <MenuItem value={"Agricultural/Farm Supplies"}>Agricultural/Farm Supplies</MenuItem>
+                <MenuItem value={"Construction"}>Construction</MenuItem>
+                <MenuItem value={"Motor Vehicles"}>Motor Vehicles</MenuItem>
+                <MenuItem value={"Machinery, Large Objects"}>Machinery, Large Objects</MenuItem>
+                <MenuItem value={"Intermodal Cont."}>Intermodal Cont.</MenuItem>
+                <MenuItem value={"Household Goods"}>Household Goods</MenuItem>
+                <MenuItem value={"Utilities"}>Utilities</MenuItem>
+                <MenuItem value={"Passengers"}>Passengers</MenuItem>
+                <MenuItem value={"Chemicals"}>Chemicals</MenuItem>
+                <MenuItem value={"Liquids/Gases"}>Liquids/Gases</MenuItem>
+                <MenuItem value={"Drive/Tow away"}>Drive/Tow away</MenuItem>
+                <MenuItem value={"Mobile Homes"}>Mobile Homes</MenuItem>
+                <MenuItem value={"Intrastate"}>Intrastate</MenuItem>
+                <MenuItem value={"Coal/Coke"}>Coal/Coke</MenuItem>
+                <MenuItem value={"Livestock"}>Livestock</MenuItem>
+                <MenuItem value={"Water Well"}>Water Well</MenuItem>
+                <MenuItem value={"Oilfield Equipment"}>Oilfield Equipment</MenuItem>
               </Select>
             </FormControl> 
           </Box>

@@ -172,7 +172,7 @@ const Vendors = () => {
   };
 
   const updateSearchTermAndCategory = (term, category) => {
-    setSearchTerm(term);
+    setSearchTerm(term || "a"); // default to "a"
     setSearchCategory(category);
     setCursor(null); // Reset cursor
     setCursorStack([]); // Reset cursor stack;
@@ -257,11 +257,13 @@ const Vendors = () => {
 
             <Button 
               variant="contained" 
+              disabled={data.cursor >= data.totalResults} 
               onClick={goNext}
               sx={{
-                border: `1px solid ${theme.palette.primary[100]}`, 
+                border: cursorStack.length === 0 ? 'none' : `1px solid ${theme.palette.primary[100]}`,
                 fontSize: "1rem", 
-                boxShadow: "none"}}>
+                boxShadow: "none",
+                mr: "0.5rem"}}>
                 Next
             </Button>
           </Box>
