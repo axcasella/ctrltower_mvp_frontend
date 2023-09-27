@@ -57,7 +57,7 @@ export const api = createApi({
     }),
     createRFPRequest: build.mutation({
       query: (body) => ({
-        url: `rfp_management`,
+        url: `rfp_management/newRequest`,
         method: "POST",
         body,
       }),
@@ -73,4 +73,5 @@ export const {
   useGetDashboardQuery,
   useSearchVendorsQuery,
   useGetVendorByUSDOTFromFMCSAQuery,
+  useCreateRFPRequestMutation,
 } = api;

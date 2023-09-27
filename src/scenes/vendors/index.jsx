@@ -260,7 +260,7 @@ const Vendors = () => {
               disabled={data.cursor >= data.totalResults} 
               onClick={goNext}
               sx={{
-                border: cursorStack.length === 0 ? 'none' : `1px solid ${theme.palette.primary[100]}`,
+                border: data.cursor >= data.totalResults ? 'none' : `1px solid ${theme.palette.primary[100]}`,
                 fontSize: "1rem", 
                 boxShadow: "none",
                 mr: "0.5rem"}}>
