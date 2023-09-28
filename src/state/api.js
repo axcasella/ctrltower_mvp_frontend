@@ -61,7 +61,11 @@ export const api = createApi({
         method: "POST",
         body,
       }),
-      invalidatesTags: ["Vendor", "RFP"],
+      providesTags: ["RFP"],
+    }),
+    getRFPRequestsByShipperID: build.query({
+      query: (shipperID) => `rfp_management/getRFPsWithShipperID/${shipperID}`,
+      providesTags: ["RFP"],
     }),
   }),
 });
@@ -74,4 +78,5 @@ export const {
   useSearchVendorsQuery,
   useGetVendorByUSDOTFromFMCSAQuery,
   useCreateRFPRequestMutation,
+  useGetRFPRequestsByShipperIDQuery,
 } = api;

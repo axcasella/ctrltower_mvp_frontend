@@ -40,7 +40,8 @@ const VendorDetails = () => {
     if (usdot) { 
       try {
         let RFPRequestName = "testing";
-        let response = await createRFPRequest({ vendorID: usdot, RFPRequestName, shipperID }); 
+        let vendorName = data.saferData.dba_name ? data.saferData.dba_name : data.saferData.legal_name;
+        let response = await createRFPRequest({ vendorID: usdot, RFPRequestName, shipperID, vendorName }); 
         console.log("response", response);
         if (response.data) {
           setOpenSuccessAlert(true);
@@ -446,7 +447,7 @@ const VendorDetails = () => {
                       </IconButton>
                     }
                   >
-                      RFP Request submitted successfully! CtrlTower will take it from here. You can visit the workflow tab to check on progress. 
+                      RFP Request submitted successfully! CtrlTower will take it from here. You can visit the RFP management tab to check on progress. 
                   </Alert>
                 </Collapse>
 

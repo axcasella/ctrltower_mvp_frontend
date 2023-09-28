@@ -39,34 +39,42 @@ import logoImage from "assets/ctrltower_logo.png"
 const navItems = [
   {
     text: "Dashboard",
+    key: "dashboard",
     icon: <AppsIcon />,
   },
   {
     text: "Explore",
+    key: "explore",
     icon: <ExploreOutlinedIcon />,
   },
   {
     text: "Service Management",
+    key: "service_management",
     icon: <ManageAccountsOutlinedIcon />,
   },
   {
     text: "Spend Optimization",
+    key: "spend_optimization",
     icon: <SpeedOutlinedIcon />,
   },
   {
     text: "Workflow",
+    key: "workflow",
     icon: <StoreOutlinedIcon />,
   },
   {
     text: "Integrations",
+    key: "integrations",
     icon: <BuildOutlinedIcon />,
   },
   {
     text: "CT Intelligence",
+    key: "ct_intelligence",
     icon: <InsightsOutlinedIcon />,
   },
   {
     text: "Users",
+    key: "users",
     icon: <PersonOutlineOutlinedIcon />,
   },
 ]
@@ -120,10 +128,10 @@ const Sidebar = ({
           </Box>
         
           <List>
-            {navItems.map(({text, icon}) => {
+            {navItems.map(({text, key, icon}) => {
               if (!icon) {
                 return (
-                  <Typography key={text} sx={{ m: "2.25rem 0 1rem 3rem"}}>
+                  <Typography key={key} sx={{ m: "2.25rem 0 1rem 3rem"}}>
                     {text}
                   </Typography>
                 )
@@ -132,10 +140,10 @@ const Sidebar = ({
               const lcText = text.toLowerCase();
 
               return (
-                <ListItem key={text} disablePadding sx={{height: "3rem"}}>
+                <ListItem key={key} disablePadding sx={{height: "3rem"}}>
                   <ListItemButton 
                     onClick={() => {
-                      navigate(`/${lcText}`);
+                      navigate(`/${key}`);
                       setActive(lcText);
                     }}
 
