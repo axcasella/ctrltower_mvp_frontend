@@ -48,8 +48,8 @@ const navItems = [
     icon: <ExploreOutlinedIcon />,
   },
   {
-    text: "Service Management",
-    key: "service_management",
+    text: "RFP Management",
+    key: "rfp_management",
     icon: <ManageAccountsOutlinedIcon />,
   },
   {
