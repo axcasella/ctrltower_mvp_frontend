@@ -4,7 +4,7 @@ import { useLoginUserMutation } from 'state/api';
 import { Box, FormControl, InputLabel, Input, useTheme, Typography, Button } from "@mui/material";
 import { useSignIn } from 'react-auth-kit';
 import { useDispatch } from 'react-redux';
-import { setUser } from 'state';
+import { setUser, setShipperID, setCarrierID } from 'state';
 
 const Login = () => {
   const theme = useTheme();
@@ -36,6 +36,11 @@ const Login = () => {
         });
 
         dispatch(setUser({ user: result.data.user }));
+        if (result.data.user.companyType === "shipper") {
+          dispatch(setShipperID({ shipperID: result.data.user.companyID }));
+        } else if (result.data.user.companyType === "carrier") {
+          dispatch(setCarrierID({ carrierID: result.data.user.companyID }));
+        }
 
         navigate('/dashboard');
       } else {
@@ -66,7 +71,7 @@ const Login = () => {
           minHeight: "80vh",
         }}
       >
-        <Typography variant="h4" mb={4} sx={{color: "#2DBFFD"}}>
+        <Typography variant="h4" mb={4} sx={{color: "#2DBFFD", fontWeight: "bold"}}>
           Login
         </Typography>
 

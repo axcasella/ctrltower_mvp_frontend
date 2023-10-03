@@ -97,13 +97,13 @@ const Navbar = ({user}) => {
                   fontSize="0.85rem"
                   sx={{ color: "black" }}
                 >
-                  {user.first_name} {user.last_name}
+                  {user?.first_name} {user?.last_name}
                 </Typography>
                 <Typography
                   fontSize="0.75rem"
                   sx={{ color: "black" }}
                 >
-                  {user.occupation}
+                  {user?.occupation}
                 </Typography>
               </Box>
               <ArrowDropDownOutlined

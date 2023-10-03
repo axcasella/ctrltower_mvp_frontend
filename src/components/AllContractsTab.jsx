@@ -17,6 +17,7 @@ const AllContractsTab = () => {
   const rowsPerPage = 5;
 
   const shipperID = useSelector(state => state.global.shipperID);
+  console.log("shipperID: ", shipperID);
   const { data, isLoading } = useGetRFPRequestsByShipperIDQuery(shipperID);
   console.log("RFPs data", data);
 

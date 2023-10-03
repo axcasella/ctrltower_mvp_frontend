@@ -2,9 +2,9 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   mode: "light",
-  // userID: "63701cc1f03239c72c00017f", // TODO: get this from login
   user: null,
-  shipperID: "63701d74f0323986f3000146"
+  shipperID: null,
+  carrierID: null,
 };
 
 export const globalSlice = createSlice({
@@ -16,10 +16,16 @@ export const globalSlice = createSlice({
     },
     setUser: (state, action) => {
       state.user = action.payload.user;
-    }
+    },
+    setShipperID: (state, action) => {
+      state.shipperID = action.payload.shipperID;
+    },
+    setCarrierID: (state, action) => {
+      state.carrierID = action.payload.carrierID;
+    },
   },
 });
 
-export const { setMode, setUser } = globalSlice.actions;
+export const { setMode, setUser, setCarrierID, setShipperID } = globalSlice.actions;
 
 export default globalSlice.reducer;
