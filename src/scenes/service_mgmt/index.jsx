@@ -30,7 +30,7 @@ const ServiceManagement = () => {
         }}
       >
         <FlexBetween sx={{mb: "2rem"}}>
-          <Typography variant="h4" fontWeight="600" color={theme.palette.grey[1000]}>My Contracts</Typography>
+          <Typography variant="h4" fontWeight="600" color={theme.palette.grey[1000]}>RFPs</Typography>
           <Button variant="contained" sx={{textTransform: "none", backgroundColor: "#2DBFFD", borderRadius: "8px", color: "white", fontSize: "15px", boxShadow: "none"}}>
             <DownloadIcon sx={{mr: "0.5rem"}}/>
             Export as CSV

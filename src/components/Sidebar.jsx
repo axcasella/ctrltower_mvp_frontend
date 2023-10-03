@@ -13,6 +13,7 @@ import {
   useTheme,
   Button
 } from "@mui/material";
+import {useSignOut} from 'react-auth-kit';
 
 import AppsIcon from '@mui/icons-material/Apps';
 import ExploreOutlinedIcon from '@mui/icons-material/ExploreOutlined';
@@ -85,10 +86,15 @@ const Sidebar = ({
   user
 }) => {
   const { pathname } = useLocation();
+  const signOut = useSignOut();
   const [active, setActive] = useState("");
   const navigate = useNavigate();
   const theme = useTheme();
 
+  const logOut = () => {
+    signOut();
+    navigate('/login');
+  }
   // user is the logged in user
 
   useEffect(() => {
@@ -217,7 +223,7 @@ const Sidebar = ({
                 <ListItemText primary={"Settings"} />
               </ListItem>
 
-              <ListItem>
+              <ListItem sx={{cursor: "pointer"}} onClick={logOut}>
                 <ListItemIcon sx={{ml: "2rem", color: "#383A47"}}>
                   <LogoutOutlinedIcon />
                 </ListItemIcon>

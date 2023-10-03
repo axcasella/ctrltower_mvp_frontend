@@ -7,6 +7,7 @@ export const api = createApi({
     "User",
     "Vendor",
     "Dashboard",
+    "Auth",
   ],
   endpoints: (build) => ({
     getUser: build.query({
@@ -67,6 +68,14 @@ export const api = createApi({
       query: (shipperID) => `rfp_management/getRFPsWithShipperID/${shipperID}`,
       providesTags: ["RFP"],
     }),
+    loginUser: build.mutation({
+      query: ({ email, password }) => ({
+        url: 'general/login',
+        method: 'POST',
+        body: { email, password }
+      }),
+      providesTags: ["Auth"],
+    }),
   }),
 });
 
@@ -79,4 +88,5 @@ export const {
   useGetVendorByUSDOTFromFMCSAQuery,
   useCreateRFPRequestMutation,
   useGetRFPRequestsByShipperIDQuery,
+  useLoginUserMutation,
 } = api;
