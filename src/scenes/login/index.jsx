@@ -68,11 +68,11 @@ const Login = () => {
           backgroundColor: "#ffffff",
           padding: "1.5rem",   
           borderRadius: "0.55rem",
-          minHeight: "80vh",
+          minHeight: "50vh",
         }}
       >
         <Typography variant="h4" mb={4} sx={{color: "#2DBFFD", fontWeight: "bold"}}>
-          Login
+          Login to CtrlTower
         </Typography>
 
         <FormControl fullWidth sx={{mb: 5}}>
@@ -111,7 +111,7 @@ const Login = () => {
 
         {error ? <Typography color="error">{error}</Typography> : null}
 
-        <Box mt={3}>
+        <Box mt={8}>
           <Button variant="contained" color="primary" fullWidth onClick={onSubmit}
             sx={{backgroundColor: theme.palette.primary[100], color: "white", fontSize: "1rem", boxShadow: "none"}}
           >

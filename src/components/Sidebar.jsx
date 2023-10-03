@@ -27,6 +27,9 @@ import BuildOutlinedIcon from '@mui/icons-material/BuildOutlined';
 import InsightsOutlinedIcon from '@mui/icons-material/InsightsOutlined';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import CallOutlinedIcon from '@mui/icons-material/CallOutlined';
+import LocalShippingIcon from '@mui/icons-material/LocalShipping';
+import MarkunreadMailboxIcon from '@mui/icons-material/MarkunreadMailbox';
+import PostAddIcon from '@mui/icons-material/PostAdd';
 
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -47,31 +50,55 @@ const navItems = [
     text: "Explore",
     key: "explore",
     icon: <ExploreOutlinedIcon />,
+    condition: user => user.companyType === "shipper"
   },
   {
     text: "RFP Management",
     key: "rfp_management",
     icon: <ManageAccountsOutlinedIcon />,
+    condition: user => user.companyType === "shipper"
+  },
+  {
+    text: "Loads",
+    key: "loads",
+    icon: <LocalShippingIcon />,
+    condition: user => user.companyType === "carrier" || user.companyType === "shipper"
   },
   {
     text: "Spend Optimization",
     key: "spend_optimization",
     icon: <SpeedOutlinedIcon />,
+    condition: user => user.companyType === "shipper"
   },
   {
     text: "Workflow",
     key: "workflow",
     icon: <StoreOutlinedIcon />,
+    condition: user => user.companyType === "shipper"
   },
   {
     text: "Integrations",
     key: "integrations",
     icon: <BuildOutlinedIcon />,
+    condition: user => user.companyType === "shipper"
   },
   {
     text: "CT Intelligence",
     key: "ct_intelligence",
     icon: <InsightsOutlinedIcon />,
+    condition: user => user.companyType === "shipper"
+  },
+  {
+    text: "Onboard",
+    key: "onboard",
+    icon: <PostAddIcon />,
+    condition: user => user.companyType === "admin"
+  },
+  {
+    text: "Requests",
+    key: "requests",
+    icon: <MarkunreadMailboxIcon />,
+    condition: user => user.companyType === "carrier" 
   },
   {
     text: "Users",
@@ -95,7 +122,6 @@ const Sidebar = ({
     signOut();
     navigate('/login');
   }
-  // user is the logged in user
 
   useEffect(() => {
     setActive(pathname.substring(1));
@@ -134,7 +160,8 @@ const Sidebar = ({
           </Box>
         
           <List>
-            {navItems.map(({text, key, icon}) => {
+            {navItems.filter(item => !item.condition || item.condition(user))
+            .map(({text, key, icon, condition}) => {
               if (!icon) {
                 return (
                   <Typography key={key} sx={{ m: "2.25rem 0 1rem 3rem"}}>
