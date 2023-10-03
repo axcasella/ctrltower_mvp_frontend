@@ -3,9 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import { useLoginUserMutation } from 'state/api';
 import { Box, FormControl, InputLabel, Input, useTheme, Typography, Button } from "@mui/material";
 import { useSignIn } from 'react-auth-kit';
+import { useDispatch } from 'react-redux';
+import { setUser } from 'state';
 
 const Login = () => {
   const theme = useTheme();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const login = useSignIn();
 
@@ -31,6 +34,9 @@ const Login = () => {
           tokenType: "Bearer",
           authState: {user: result.data.user}
         });
+
+        dispatch(setUser({ user: result.data.user }));
+
         navigate('/dashboard');
       } else {
         console.log("result.error", result);

@@ -8,8 +8,9 @@ import { useGetUserQuery } from 'state/api';
 
 const Layout = () => {
   const isNonMobile = useMediaQuery("(min-width: 600px)");
-  const userID = useSelector(state => state.global.userID);
-  const { data } = useGetUserQuery(userID);
+
+  const user = useSelector(state => state.global.user);  
+  const { data } = useGetUserQuery(user._id);
 
   return (
     <Box display={isNonMobile ? "flex" : "block"} width="100%" height="100%">

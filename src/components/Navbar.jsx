@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { LightModeOutlined, DarkModeOutlined, Menu as MenuIcon, Search, SettingsOutlined, ArrowDropDownOutlined } from '@mui/icons-material'
+import { useSignOut } from 'react-auth-kit';
+import { LightModeOutlined, DarkModeOutlined, Menu as MenuIcon, ArrowDropDownOutlined } from '@mui/icons-material'
 import FlexBetween from 'components/FlexBetween';
 import { useDispatch } from 'react-redux'
 import { setMode } from "state";
 import loggedInUserImage from "assets/logged_in_user.png"
 import { AppBar, IconButton, InputBase, Toolbar, useTheme, Button, Menu, MenuItem, Typography, Box } from '@mui/material';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { capitalizePathname } from 'helpers';
 
 import NotificationsIcon from '@mui/icons-material/Notifications';
@@ -16,12 +17,19 @@ const Navbar = ({user}) => {
 
   const { pathname } = useLocation();
   const [pageName, setPageName] = useState("");
-  console.log("pathname", pathname);
 
   const [anchorEl, setAnchorEl] = useState(null);
   const isOpen = Boolean(anchorEl);
   const handleClick = (event) => setAnchorEl(event.currentTarget);
   const handleClose = () => setAnchorEl(null);
+
+  const signOut = useSignOut();
+  const navigate = useNavigate();
+
+  const logOut = () => {
+    signOut();
+    navigate('/login');
+  }
 
   useEffect(() => {
     // if page name starts with "/vendor/", then set page name to "Vendor Details"
@@ -89,7 +97,7 @@ const Navbar = ({user}) => {
                   fontSize="0.85rem"
                   sx={{ color: "black" }}
                 >
-                  {user.name}
+                  {user.first_name} {user.last_name}
                 </Typography>
                 <Typography
                   fontSize="0.75rem"
@@ -108,7 +116,7 @@ const Navbar = ({user}) => {
               onClose={handleClose}
               anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
             >
-              <MenuItem onClick={handleClose}>Log Out</MenuItem>
+              <MenuItem onClick={logOut}>Log Out</MenuItem>
             </Menu>
           </FlexBetween>
       </FlexBetween>
