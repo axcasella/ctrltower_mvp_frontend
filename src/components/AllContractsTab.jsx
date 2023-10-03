@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { useTheme, Box, Typography, Button, TableContainer, TableHead, TableRow, TableBody, TableCell, Paper, Table, TablePagination } from '@mui/material'
 import { convertDatabaseDateToReadableDate } from 'helpers';
 import { useGetRFPRequestsByShipperIDQuery } from 'state/api';
@@ -12,18 +12,24 @@ const columns = [
   { field: 'last_update_date', label: 'Last Update', width: 130 },
 ];
 
-const AllContractsTab = () => {
+const AllContractsTab = ({shouldRefresh, onRefreshDone}) => {
   const [page, setPage] = useState(0);
   const rowsPerPage = 5;
 
   const shipperID = useSelector(state => state.global.shipperID);
-  console.log("shipperID: ", shipperID);
-  const { data, isLoading } = useGetRFPRequestsByShipperIDQuery(shipperID);
+  const { data, isLoading, refetch } = useGetRFPRequestsByShipperIDQuery(shipperID);
   console.log("RFPs data", data);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
+
+  useEffect(() => {
+    if (shouldRefresh) {
+      refetch();
+      onRefreshDone(); // inform parent that refresh is done
+    }
+  }, [shouldRefresh]);
 
   return (
     <Box>

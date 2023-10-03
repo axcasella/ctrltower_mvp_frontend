@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import { useTheme, Box, Typography, Button, Tabs, Tab } from "@mui/material";
 import FlexBetween from 'components/FlexBetween';
 import DownloadIcon from '@mui/icons-material/Download';
+import RefreshIcon from '@mui/icons-material/Refresh';
 import AllContractsTab from 'components/AllContractsTab';
 import MyApprovalsTab from 'components/MyApprovalsTab';
 
@@ -13,6 +14,11 @@ const ServiceManagement = () => {
   const handleTabChange = (e, newTab) => {
     setTab(newTab);
   };
+
+  const [shouldRefresh, setShouldRefresh] = useState(false);
+  const handleRefresh = () => {
+    setShouldRefresh(true);
+  }
 
   return (
     <Box
@@ -30,7 +36,26 @@ const ServiceManagement = () => {
         }}
       >
         <FlexBetween sx={{mb: "2rem"}}>
-          <Typography variant="h4" fontWeight="600" color={theme.palette.grey[1000]}>RFPs</Typography>
+          <FlexBetween>
+            <Typography variant="h4" fontWeight="600" color={theme.palette.grey[1000]}>RFPs</Typography>
+            <Button variant="contained" sx={{
+              textTransform: "none", 
+              backgroundColor: "#ffffff", 
+              color: "#2DBFFD", 
+              fontSize: "15px", 
+              boxShadow: "none",
+              '&:hover': {
+                  backgroundColor: "#ffffff",  // Maintain the original background color
+                  boxShadow: "none",  // Remove any shadow
+                  // Add any other hover effects you'd like to disable here
+              }}}
+              onClick={handleRefresh}
+            >
+              <RefreshIcon sx={{mr: "0.5rem"}}/>
+              Refresh
+            </Button>
+          </FlexBetween>
+    
           <Button variant="contained" sx={{textTransform: "none", backgroundColor: "#2DBFFD", borderRadius: "8px", color: "white", fontSize: "15px", boxShadow: "none"}}>
             <DownloadIcon sx={{mr: "0.5rem"}}/>
             Export as CSV
@@ -66,7 +91,7 @@ const ServiceManagement = () => {
           </Tabs>
         </Box>
         {tab === 0 && (
-          <AllContractsTab />
+          <AllContractsTab shouldRefresh={shouldRefresh} onRefreshDone={() => setShouldRefresh(false)}/>
         )}
 
         {tab === 1 && (
