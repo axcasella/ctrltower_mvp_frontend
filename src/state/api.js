@@ -8,6 +8,7 @@ export const api = createApi({
     "Vendor",
     "Dashboard",
     "Auth",
+    "Onboard",
   ],
   endpoints: (build) => ({
     getUser: build.query({
@@ -76,6 +77,30 @@ export const api = createApi({
       }),
       providesTags: ["Auth"],
     }),
+    onboardShipper: build.mutation({
+      query: (body) => ({
+        url: `onboard/shipper`,
+        method: "POST",
+        body,
+      }),
+      providesTags: ["Onboard"],
+    }),
+    onboardCarrier: build.mutation({
+      query: (body) => ({
+        url: `onboard/carrier`,
+        method: "POST",
+        body,
+      }),
+      providesTags: ["Onboard"],
+    }),
+    addLoad: build.mutation({
+      query: (body) => ({
+        url: `load/addLoad`,
+        method: "POST",
+        body,
+      }),
+      providesTags: ["Onboard"],
+    }),
   }),
 });
 
@@ -89,4 +114,7 @@ export const {
   useCreateRFPRequestMutation,
   useGetRFPRequestsByShipperIDQuery,
   useLoginUserMutation,
+  useOnboardShipperMutation,
+  useOnboardCarrierMutation,
+  useAddLoadMutation,
 } = api;

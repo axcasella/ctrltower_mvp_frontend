@@ -89,9 +89,15 @@ const navItems = [
     condition: user => user.companyType === "shipper"
   },
   {
-    text: "Onboard",
-    key: "onboard",
+    text: "Onboard Shipper",
+    key: "onboard_shipper",
     icon: <PostAddIcon />,
+    condition: user => user.companyType === "admin"
+  },
+  {
+    text: "Onboard Carrier",
+    key: "onboard_carrier",
+    icon: <LocalShippingIcon />,
     condition: user => user.companyType === "admin"
   },
   {

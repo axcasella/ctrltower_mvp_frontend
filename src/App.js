@@ -12,6 +12,7 @@ import Vendors from "scenes/vendors";
 import VendorDetails from "scenes/vendor_details";
 import ServiceManagement from "scenes/service_mgmt";
 import Login from "scenes/login";
+import OnboardShipper from "scenes/onboard_shipper";
 
 function App() {
   const mode = useSelector((state) => state.global.mode);
@@ -50,6 +51,10 @@ function App() {
 
                 <Route path="/vendor/:usdot" element={<RequireAuth loginPath="/login"> 
                   <VendorDetails />
+                </RequireAuth>}></Route>
+
+                <Route path="/onboard_shipper" element={<RequireAuth loginPath="/login"> 
+                  <OnboardShipper />
                 </RequireAuth>}></Route>
               </Route>
             </Routes>

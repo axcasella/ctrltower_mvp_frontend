@@ -71,7 +71,7 @@ const Login = () => {
           minHeight: "50vh",
         }}
       >
-        <Typography variant="h4" mb={4} sx={{color: "#2DBFFD", fontWeight: "bold"}}>
+        <Typography variant="h4" mb={4} sx={{color: "#2DBFFD", fontWeight: "bold", display: 'flex', alignItems: 'center', justifyContent: "center"}}>
           Login to CtrlTower
         </Typography>
 
