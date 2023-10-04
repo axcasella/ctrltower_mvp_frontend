@@ -153,6 +153,8 @@ const Vendors = () => {
 
   const { data, error, isLoading } = useSearchVendorsQuery({name: searchTerm, cursor, cargoFilter: searchCategory});
   console.log("data", data);
+  console.log("isLoading", isLoading);
+  console.log("error", error)
 
   const goNext = () => {
     // Push the current cursor to the stack
@@ -196,7 +198,7 @@ const Vendors = () => {
         {data || !isLoading ? (
           <Box key={searchTerm}>
             <Typography variant="h5" fontWeight="600">
-              Found {data.totalResults} results
+              Found {data?.totalResults} results
             </Typography>
 
             <Box
@@ -211,7 +213,7 @@ const Vendors = () => {
                 "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
               }}
             >
-              {data.data.map(
+              {data?.data.map(
                 ({
                   legal_name,
                   dba_name,
@@ -257,10 +259,10 @@ const Vendors = () => {
 
             <Button 
               variant="contained" 
-              disabled={data.cursor >= data.totalResults} 
+              disabled={data?.cursor >= data?.totalResults} 
               onClick={goNext}
               sx={{
-                border: data.cursor >= data.totalResults ? 'none' : `1px solid ${theme.palette.primary[100]}`,
+                border: data?.cursor >= data?.totalResults ? 'none' : `1px solid ${theme.palette.primary[100]}`,
                 fontSize: "1rem", 
                 boxShadow: "none",
                 mr: "0.5rem"}}>

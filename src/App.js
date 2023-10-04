@@ -14,6 +14,7 @@ import ServiceManagement from "scenes/service_mgmt";
 import Login from "scenes/login";
 import OnboardShipper from "scenes/onboard_shipper";
 import OnboardCarrier from "scenes/onboard_carrier";
+import Loads from "scenes/loads";
 
 function App() {
   const mode = useSelector((state) => state.global.mode);
@@ -60,6 +61,10 @@ function App() {
 
                 <Route path="/onboard_carrier" element={<RequireAuth loginPath="/login"> 
                   <OnboardCarrier />
+                </RequireAuth>}></Route>
+
+                <Route path="/loads" element={<RequireAuth loginPath="/login"> 
+                  <Loads />
                 </RequireAuth>}></Route>
               </Route>
             </Routes>

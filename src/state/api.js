@@ -26,7 +26,7 @@ export const api = createApi({
      providesTags: ["Vendor"],
     }),
     searchVendors: build.query({
-      query: ({name, pageSize, cargoFilter, cursor = null}) => {
+      query: ({name, pageSize, cargoFilter, cursor = null}) => {        
         if (!name) {
           throw new Error("Name is required");
         };
