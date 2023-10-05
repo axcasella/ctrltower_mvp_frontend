@@ -106,6 +106,10 @@ export const api = createApi({
       query: (shipperID) => `load/getLoadByShipperID/${shipperID}`,
       providesTags: ["Load"],
     }),
+    getAllLoads: build.query({
+      query: () => `load/getAllLoads/`,
+      providesTags: ["Load"],
+    }),
   }),
 });
 
@@ -123,4 +127,5 @@ export const {
   useOnboardCarrierMutation,
   useAddLoadMutation,
   useGetLoadsByShipperIDQuery,
+  useGetAllLoadsQuery,
 } = api;
