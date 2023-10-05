@@ -16,18 +16,18 @@ const createPipelineDueData = (service, dueDate) => {
   return { service, dueDate };
 }
 
-const Dashboard = () => {
+const DashboardShipper = () => {
   const theme = useTheme();
 
   const upcomingRenewalRows = [
-    createRenewalData('Transportation', "$120,000", "Holly Flax", "Jun 15 2022"),
-    createRenewalData('Transportation', "$120,000", "Holly Flax", "Jun 15 2022"),
+    createRenewalData('Transportation', "$120,000", "Holly Flax", "Oct 15 2023"),
+    createRenewalData('Transportation', "$120,000", "Holly Flax", "Oct 15 2023"),
   ];
 
   const negotiationPipelineRows = [
-    createPipelineDueData('Warehousing', "June 15 2022"),
-    createPipelineDueData('Inventory', "June 15 2022"),
-    createPipelineDueData('Last-Mile Fulfillment', "June 15 2022"),
+    createPipelineDueData('Warehousing', "Oct 15 2023"),
+    createPipelineDueData('Inventory', "Oct 15 2023"),
+    createPipelineDueData('Last-Mile Fulfillment', "Oct 15 2023"),
   ];
 
   const tags = ["Tag"];
@@ -275,5 +275,5 @@ const Dashboard = () => {
   )
 }
 
-export default Dashboard
+export default DashboardShipper
 

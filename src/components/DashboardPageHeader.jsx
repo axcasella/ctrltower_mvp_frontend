@@ -19,7 +19,7 @@ const DashboardPageHeader = () => {
     <Box>
       <FlexBetween sx={{mt: "1rem", mb: "1rem", ml: "1rem", mr: "2rem"}}>
         <Typography variant='h3'>
-          Welcome back <span style={{fontWeight: "bold"}}>{user?.first_name}</span>
+          Welcome back <span style={{fontWeight: "bold"}}>{user?.first_name}!</span>
         </Typography>
         <Badge
           badgeContent={8} color="error" size="large"

@@ -6,7 +6,9 @@ import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import { themeSettings } from "theme";
 import { AuthProvider, RequireAuth } from "react-auth-kit";
 
-import Dashboard from "scenes/dashboard";
+import DashboardShipper from "scenes/dashboardShipper";
+import DashboardCarrier from "scenes/dashboardCarrier";
+import DashboardAdmin from "scenes/dashboardAdmin";
 import Layout from "scenes/layout";
 import Vendors from "scenes/vendors";
 import VendorDetails from "scenes/vendor_details";
@@ -19,6 +21,7 @@ import Loads from "scenes/loads";
 function App() {
   const mode = useSelector((state) => state.global.mode);
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
+  const userType = useSelector((state) => state.global.user.companyType);
 
   return (
     <div className="app">
@@ -36,11 +39,31 @@ function App() {
 
               <Route element={<Layout />}>
                 <Route path="/" element={<RequireAuth loginPath="/login"> 
-                  <Dashboard />
+                  {userType ? (() => {
+                    switch (userType) {
+                      case 'shipper':
+                        return <DashboardShipper />;
+                      case 'admin':
+                        return <DashboardAdmin />;
+                      case 'carrier':
+                      default:
+                        return <DashboardCarrier />;
+                    }
+                  })() : null}
                 </RequireAuth>}></Route>
 
                 <Route path="/dashboard" element={<RequireAuth loginPath="/login"> 
-                  <Dashboard />
+                  {userType ? (() => {
+                    switch (userType) {
+                      case 'shipper':
+                        return <DashboardShipper />;
+                      case 'admin':
+                        return <DashboardAdmin />;
+                      case 'carrier':
+                      default:
+                        return <DashboardCarrier />;
+                    }
+                  })() : null}            
                 </RequireAuth>}></Route>
 
                 <Route path="/explore" element={<RequireAuth loginPath="/login"> 

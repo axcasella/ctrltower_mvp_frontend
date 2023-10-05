@@ -36,7 +36,7 @@ const DashboardLoggedInUserTasks = ({tags, userName, taskName}) => {
               ))}
             </Stack>
           </FlexBetween>
-          <Typography fontSize="12px">June 15 2022</Typography>
+          <Typography fontSize="12px">Oct 15 2023</Typography>
         </Box>
       </Box>
     </Box>

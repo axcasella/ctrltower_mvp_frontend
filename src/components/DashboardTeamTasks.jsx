@@ -29,7 +29,7 @@ const DashboardTeamTasks = ({tags, taskName}) => {
       <Typography fontSize="14px" fontWeight="600" mt="0.75rem">Upgrade Approval</Typography>
 
       <FlexBetween mt="0.75rem">
-        <Typography fontSize="12px">June 15 2022</Typography>
+        <Typography fontSize="12px">Oct 28 2023</Typography>
         <Box>
           <Box
             component="img"

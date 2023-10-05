@@ -36,7 +36,6 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 import FlexBetween from './FlexBetween';
 import supportPersonImage from "assets/support_person.png"
-import { Draw } from '@mui/icons-material';
 
 import logoImage from "assets/ctrltower_logo.png"
 
