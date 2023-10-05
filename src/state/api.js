@@ -9,7 +9,8 @@ export const api = createApi({
     "Dashboard",
     "Auth",
     "Onboard",
-    "Load"
+    "Load",
+    "Carrier",
   ],
   endpoints: (build) => ({
     getUser: build.query({
@@ -110,6 +111,10 @@ export const api = createApi({
       query: () => `load/getAllLoads/`,
       providesTags: ["Load"],
     }),
+    getCTCarriers: build.query({
+      query: () => `carrier/allCTCarriers`,
+      providesTags: ["Carrier"],
+    }),
   }),
 });
 
@@ -128,4 +133,5 @@ export const {
   useAddLoadMutation,
   useGetLoadsByShipperIDQuery,
   useGetAllLoadsQuery,
+  useGetCTCarriersQuery,
 } = api;

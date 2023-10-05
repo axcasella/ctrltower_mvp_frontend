@@ -11,11 +11,14 @@ import {
   useMediaQuery,
   Stack,
   Chip,
+  Tabs,
+  Tab
 } from "@mui/material";
 import ExplorePageHeader from "components/ExplorePageHeader";
 import { useSearchVendorsQuery } from "state/api";
 import { useNavigate } from 'react-router-dom';
 import { capitalizeFirstLetter } from "helpers";
+import CtrlTowerCarriers from "components/CtrlTowerCarriers";
 
 const Vendor = ({
   legal_name,
@@ -41,6 +44,7 @@ const Vendor = ({
         backgroundImage: "none",
         backgroundColor: theme.palette.background.alt,
         borderRadius: "0.55rem",
+        border: `1px solid lightgrey`,
       }}
     >
       <CardContent
@@ -94,6 +98,11 @@ const Vendor = ({
           variant="primary"
           size="small"
           onClick={() => setIsExpanded(!isExpanded)}
+          sx={{
+            backgroundColor: "#2DBFFD",
+            fontSize: "11px",
+            ml: 1,
+          }}
         >
           See More
         </Button>
@@ -104,7 +113,7 @@ const Vendor = ({
         timeout="auto"
         unmountOnExit
         sx={{
-          color: theme.palette.neutral[300],
+          color: "black",
         }}
       >
         <CardContent>
@@ -145,39 +154,33 @@ const Vendor = ({
 const Vendors = () => {
   const theme = useTheme();
   const isNonMobile = useMediaQuery("(min-width: 1000px)");
-
-  const [cursor, setCursor] = useState();  // Initially, no cursor.
+  const [cursor, setCursor] = useState();  
   const [cursorStack, setCursorStack] = useState([]);
   const [searchTerm, setSearchTerm] = useState("A");
   const [searchCategory, setSearchCategory] = useState();
-
   const { data, error, isLoading } = useSearchVendorsQuery({name: searchTerm, cursor, cargoFilter: searchCategory});
-  console.log("data", data);
-  console.log("isLoading", isLoading);
-  console.log("error", error)
+  const [currentTab, setCurrentTab] = useState(0);
+
+  const handleTabChange = (e, newValue) => {
+    setCurrentTab(newValue);
+  };
 
   const goNext = () => {
-    // Push the current cursor to the stack
     setCursorStack(prevStack => [...prevStack, cursor]);
-    
-    // Set the cursor to the next one from the data received
     setCursor(data.cursor);
   };  
 
   const goBack = () => {
-    // Pop the last cursor from the stack
     const newCursor = cursorStack.pop();
     setCursor(newCursor);
-
-    // Update the stack state
     setCursorStack([...cursorStack]);
   };
 
   const updateSearchTermAndCategory = (term, category) => {
-    setSearchTerm(term || "a"); // default to "a"
+    setSearchTerm(term || "a");
     setSearchCategory(category);
-    setCursor(null); // Reset cursor
-    setCursorStack([]); // Reset cursor stack;
+    setCursor(null);
+    setCursorStack([]);
   }
 
   return (
@@ -194,87 +197,127 @@ const Vendors = () => {
           minHeight: "80vh"
         }}
       >
-        <ExplorePageHeader title="Explore" subtitle="" onSearchButtonClick={updateSearchTermAndCategory} />
-        {data || !isLoading ? (
-          <Box key={searchTerm}>
-            <Typography variant="h5" fontWeight="600">
-              Found {data?.totalResults} results
-            </Typography>
+        <ExplorePageHeader title="Carrier network" subtitle="" onSearchButtonClick={updateSearchTermAndCategory} />
 
-            <Box
-              mt="20px"
-              display="grid"
-              gridTemplateColumns="repeat(3, minmax(0, 1fr))"
-              justifyContent="space-between"
-              rowGap="20px"
-              columnGap="1.33%"
-              sx={{
-                mb: "2rem",
-                "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
-              }}
-            >
-              {data?.data.map(
-                ({
-                  legal_name,
-                  dba_name,
-                  entity_type,
-                  mailing_address,
-                  mc_mx_ff_numbers,
-                  operation_classification,
-                  operating_status,
-                  phone,
-                  usdot,
-                  cargo_carried,
-                  carrier_operation
-                }) => (
-                  <Vendor
-                    key={usdot}
-                    legal_name={legal_name}
-                    dba_name={dba_name}
-                    entity_type={entity_type}
-                    mailing_address={mailing_address}
-                    mc_mx_ff_numbers={mc_mx_ff_numbers}
-                    operation_classification={operation_classification}
-                    operating_status={operating_status}
-                    phone={phone}
-                    usdot={usdot}
-                    cargo_carried={cargo_carried}
-                    carrier_operation={carrier_operation}
-                  />
-                )
-              )}
-            </Box>
-            
-            <Button 
-              variant="contained" 
-              disabled={cursorStack.length === 0} 
-              onClick={goBack}
-              sx={{
-                border: cursorStack.length === 0 ? 'none' : `1px solid ${theme.palette.primary[100]}`,
-                fontSize: "1rem", 
-                boxShadow: "none",
-                mr: "0.5rem"}}>
-                Previous
-            </Button>
+        <Tabs value={currentTab} onChange={handleTabChange}
+          sx={{
+            "& .MuiTabs-indicator": {
+              backgroundColor: "#2DBFFD",
+              height: 3,
+            },
+            "& .MuiTab-root.Mui-selected": {
+              color: '#2DBFFD'
+            },
+            mb: 5
+          }}
+        >
+          <Tab label="All carriers"
+            sx={{
+              fontWeight: "600",
+              fontSize: "18px",
+              textTransform: "none"
+            }}/>
 
-            <Button 
-              variant="contained" 
-              disabled={data?.cursor >= data?.totalResults} 
-              onClick={goNext}
-              sx={{
-                border: data?.cursor >= data?.totalResults ? 'none' : `1px solid ${theme.palette.primary[100]}`,
-                fontSize: "1rem", 
-                boxShadow: "none",
-                mr: "0.5rem"}}>
-                Next
-            </Button>
-          </Box>
-        ) : (
-          <>Loading...</>
-        )}
-      </Box>
+          <Tab label="Verified carriers"
+            sx={{
+              fontWeight: "600",
+              fontSize: "18px",
+              textTransform: "none"
+            }}
+            />
+        </Tabs>
+
+        {currentTab === 0 && (
+          <>
+            {data || !isLoading ? (
+              <Box key={searchTerm}>
+                <Typography variant="h5" fontWeight="600">
+                  Found {data?.totalResults} results
+                </Typography>
+
+                <Box
+                  mt="20px"
+                  display="grid"
+                  gridTemplateColumns="repeat(3, minmax(0, 1fr))"
+                  justifyContent="space-between"
+                  rowGap="20px"
+                  columnGap="1.33%"
+                  sx={{
+                    mb: "2rem",
+                    "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
+                  }}
+                >
+                  {data?.data.map(
+                    ({
+                      legal_name,
+                      dba_name,
+                      entity_type,
+                      mailing_address,
+                      mc_mx_ff_numbers,
+                      operation_classification,
+                      operating_status,
+                      phone,
+                      usdot,
+                      cargo_carried,
+                      carrier_operation
+                    }) => (
+                      <Vendor
+                        key={usdot}
+                        legal_name={legal_name}
+                        dba_name={dba_name}
+                        entity_type={entity_type}
+                        mailing_address={mailing_address}
+                        mc_mx_ff_numbers={mc_mx_ff_numbers}
+                        operation_classification={operation_classification}
+                        operating_status={operating_status}
+                        phone={phone}
+                        usdot={usdot}
+                        cargo_carried={cargo_carried}
+                        carrier_operation={carrier_operation}
+                      />
+                    )
+                  )}
+                </Box>
+                
+                <Button 
+                  variant="contained" 
+                  disabled={cursorStack.length === 0} 
+                  onClick={goBack}
+                  sx={{
+                    border: cursorStack.length === 0 ? 'none' : `1px solid ${theme.palette.primary[100]}`,
+                    fontSize: "1rem", 
+                    boxShadow: "none",
+                    mr: "0.5rem"}}>
+                    Previous
+                </Button>
+
+                <Button 
+                  variant="contained" 
+                  disabled={data?.cursor >= data?.totalResults} 
+                  onClick={goNext}
+                  sx={{
+                    border: data?.cursor >= data?.totalResults ? 'none' : `1px solid ${theme.palette.primary[100]}`,
+                    fontSize: "1rem", 
+                    boxShadow: "none",
+                    mr: "0.5rem"}}>
+                    Next
+                </Button>
+              </Box>
+          ) : (
+            <>Loading...</>
+          )}
+        </>
+      )}
+
+      {currentTab === 1 && <CtrlTowerCarriers />}
     </Box>
+  </Box>
   );
 };
 
 export default Vendors;
+
+
+
+
+

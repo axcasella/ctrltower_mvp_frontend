@@ -29,7 +29,6 @@ const formatDate = (dateString) => {
 };
 
 const AllLoadstabs = ({ shouldRefresh, onRefreshDone }) => {
-  const theme = useTheme();
   const { data, isLoading, refetch } = useGetAllLoadsQuery();
   const navigate = useNavigate();
 
