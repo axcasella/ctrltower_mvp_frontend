@@ -8,6 +8,7 @@ import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider, DatePicker } from '@mui/x-date-pickers';
 import { useAddLoadMutation } from 'state/api';
+import { useSelector } from 'react-redux'; 
 
 const initialState = {
   origin_address: "",
@@ -37,11 +38,13 @@ const initialState = {
   check_in_instruction: "",
   reference_number: "",
   hazmat: false,
-  shipperID: "" // assuming the shipperID is a string
+  shipperID: "",
 };
 
 const AddLoadTab = () => {
   const theme = useTheme();
+  const shipperID = useSelector(state => state.global.shipperID); 
+  
   const [loadDetails, setLoadDetails] = useState(initialState);
   const [error, setError] = useState(null);
   const [openSuccessAlert, setOpenSuccessAlert] = useState(false);
@@ -62,6 +65,7 @@ const AddLoadTab = () => {
   };
 
     const handleSubmit = async () => {
+      loadDetails.shipperID = shipperID;
       console.log("loadDetails", loadDetails);
 
       const requiredFields = [
@@ -96,26 +100,6 @@ const AddLoadTab = () => {
 
     return (
       <Box sx={{ padding: "1.5rem", display: "flex", flexDirection: "column", gap: "1rem" }}>
-          <TextField fullWidth variant="outlined" label="Shipper ID" name="shipperID" value={loadDetails.shipperID || ""} onChange={handleChange} 
-            sx={{
-              "& .MuiOutlinedInput-root": {
-                  "&.Mui-focused fieldset": {  // Set the focused border style
-                      borderColor: "#2DBFFD",
-                  },
-              },
-              "& .MuiInputLabel-outlined.Mui-focused": {  // Change label color when focused
-                color: "#2DBFFD",
-                fontWeight: "600",
-              },
-              "& .MuiInputBase-input:focus": {
-                backgroundColor: 'white',
-              },
-              "& .MuiInputBase-input:-webkit-autofill": {
-                  WebkitBoxShadow: '0 0 0 30px white inset',
-              }
-            }}
-          />
-
           <TextField fullWidth variant="outlined" label="Origin Address" name="origin_address" value={loadDetails.origin_address || ""} onChange={handleChange} 
             sx={{
               "& .MuiOutlinedInput-root": {
