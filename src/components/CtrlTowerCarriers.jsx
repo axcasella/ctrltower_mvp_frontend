@@ -21,6 +21,7 @@ const CarrierTile = ({ carrier }) => {
         backgroundColor: theme.palette.background.alt,
         borderRadius: "0.55rem",
         border: `1px solid lightgrey`,
+        pb: "1rem"
       }}
       // onClick={() => {
       //   navigate(`/vendor/${carrier.usdot}`);

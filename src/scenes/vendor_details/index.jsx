@@ -7,6 +7,8 @@ import FlexBetween from 'components/FlexBetween';
 import { useParams } from 'react-router-dom';
 import { useGetVendorByIDQuery, useGetVendorByUSDOTFromFMCSAQuery, useCreateRFPRequestMutation } from "state/api";
 import { useSelector } from "react-redux";
+import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
+import PhoneIcon from '@mui/icons-material/Phone';
 
 // Info on fields:
 // https://safer.fmcsa.dot.gov/saferhelp.aspx#Inspections
@@ -76,15 +78,37 @@ const VendorDetails = () => {
             <Box> 
               <Box sx={{ mb: "25px" }}>
                 <FlexBetween>
-                  <Typography
-                    variant="h3"
-                    color={theme.palette.grey[1000]}
-                    fontWeight="600"
-                    sx={{ mb: "5px" }}
-                  >
-                    {data.saferData.dba_name ? data.saferData.dba_name : data.saferData.legal_name}
-                  </Typography>
-
+                  <FlexBetween sx={{ mr: "2rem" }}>
+                    <Typography
+                      variant="h3"
+                      color={theme.palette.grey[1000]}
+                      fontWeight="600"
+                      sx={{ mb: "5px", mr: "1rem" }}  
+                    >
+                      {data.saferData.dba_name ? data.saferData.dba_name : data.saferData.legal_name}
+                    </Typography>
+                    <ChatBubbleOutlineIcon 
+                      sx={{
+                        mr: "1rem", 
+                        mb: "0.5rem",
+                        color: "#2dbffd", 
+                        cursor: "pointer",       
+                        verticalAlign: "middle", 
+                        fontSize: "1.75rem"       
+                      }}
+                    />
+                    <PhoneIcon 
+                      sx={{
+                        mr: "1rem", 
+                        mb: "0.5rem",
+                        color: "#2dbffd", 
+                        cursor: "pointer",       
+                        verticalAlign: "middle", 
+                        fontSize: "1.75rem"       
+                      }}
+                    />
+                  </FlexBetween>
+                
                   <Stack direction="row" spacing={1} useFlexGap flexWrap="wrap">
                     {data.saferData.cargo_carried.map((tag) => (
                       <Chip label={tag} 

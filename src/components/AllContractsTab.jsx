@@ -52,6 +52,8 @@ const AllContractsTab = ({shouldRefresh, onRefreshDone}) => {
           {data && !isLoading ? (
             <TableBody>
               {data
+                .slice() // Create a copy of the data array
+                .reverse() // Reverse the order
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
                 <TableRow
                   key={row.id}

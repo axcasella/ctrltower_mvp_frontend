@@ -19,6 +19,7 @@ import { useSearchVendorsQuery } from "state/api";
 import { useNavigate } from 'react-router-dom';
 import { capitalizeFirstLetter } from "helpers";
 import CtrlTowerCarriers from "components/CtrlTowerCarriers";
+import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
 
 const Vendor = ({
   legal_name,
@@ -45,6 +46,7 @@ const Vendor = ({
         backgroundColor: theme.palette.background.alt,
         borderRadius: "0.55rem",
         border: `1px solid lightgrey`,
+        pb: "1rem"
       }}
     >
       <CardContent
@@ -218,13 +220,19 @@ const Vendors = () => {
               textTransform: "none"
             }}/>
 
-          <Tab label="Verified carriers"
-            sx={{
-              fontWeight: "600",
-              fontSize: "18px",
-              textTransform: "none"
-            }}
-            />
+          <Tab
+              label={
+                <Box display="flex" alignItems="center">
+                  <VerifiedUserIcon sx={{ marginRight: "0.5rem" }} />
+                  Verified carriers
+                </Box>
+              }
+              sx={{
+                  fontWeight: "600",
+                  fontSize: "18px",
+                  textTransform: "none"
+              }}
+          />
         </Tabs>
 
         {currentTab === 0 && (

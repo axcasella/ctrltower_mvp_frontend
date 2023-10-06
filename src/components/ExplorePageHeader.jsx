@@ -74,8 +74,28 @@ const ExplorePageHeader = ({ title, subtitle, onSearchButtonClick }) => {
           </Box>
           
           <Box sx={{ minWidth: 175 }}>
-            <FormControl fullWidth>
-              <InputLabel>Cargo carried</InputLabel>
+            <FormControl fullWidth
+              sx={{ 
+                borderRadius: "0.55rem",
+                '& .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#2DBFFD',
+                },
+                '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#2DBFFD',
+                },
+                '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-input': {
+                  borderColor: '#2DBFFD',
+                },
+                '& .MuiOutlinedInput-root.Mui-error .MuiOutlinedInput-notchedOutline': {
+                  borderColor: theme.palette.error.main,
+                },
+                '& .MuiInputLabel-outlined.Mui-focused': {
+                  color: "#2DBFFD",
+                  fontWeight: "600",
+                },
+              }}
+            >
+              <InputLabel>Cargo</InputLabel>
               <Select
                 labelId="catetory-select-label"
                 id="category-select"
