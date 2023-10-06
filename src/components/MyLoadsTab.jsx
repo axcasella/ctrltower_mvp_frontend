@@ -22,6 +22,8 @@ const MyLoadsTab = ({ shouldRefresh, onRefreshDone }) => {
   const theme = useTheme();
   const shipperID = useSelector(state => state.global.shipperID);
   const { data, isLoading, refetch } = useGetLoadsByShipperIDQuery(shipperID);
+  console.log(shipperID);
+  console.log(data);
   const navigate = useNavigate();
 
   // Sorting Logic
